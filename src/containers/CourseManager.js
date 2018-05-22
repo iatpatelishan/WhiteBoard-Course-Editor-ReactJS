@@ -30,7 +30,7 @@ class CourseManager extends Component {
             <div>
                 {navbar()}
                 <br/><br/><br/><br/>
-                <div className="container">
+                <div>
                     <CourseList/>
                 </div>
 

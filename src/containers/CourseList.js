@@ -19,23 +19,28 @@ class CourseList extends Component {
     render() {
         return (
             <div>
-                <h2>Course List</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div className="wbdv-course-header">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-6">Title</div>
+                            <div className="col-lg-2">Owned By</div>
+                            <div className="col-lg-2">Last Modified</div>
+                            <div className="col-lg-2">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="wbdv-clear-both"></div>
+                <div className="wbdv-course-list container">
                         {this.courseRows()}
-                    </tbody>
-                </table>
+                </div>
             </div>
         )
     }
 
     courseRows() {
-        var rows = this.state.courses.map((course) => {return (<CourseRow key={course.id} course={course}/>)})
+        var rows = this.state.courses.map((course) => {
+            return (<CourseRow key={course.id} course={course}/>)
+        })
         return (
             rows
         )

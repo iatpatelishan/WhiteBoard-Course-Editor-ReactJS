@@ -45,7 +45,7 @@ body{
     color: #ffffff !important;
 }
 .add-course-input:-moz-placeholder {
-    color: $ffffff !important;
+    color: #ffffff !important;
 }
 .add-course-input::-moz-placeholder {
     color: #ffffff !important;
@@ -65,4 +65,30 @@ body{
 }
 .add-course-input:focus:-ms-input-placeholder {
     color: #000 !important;
+}
+
+.wbdv-course-header {
+    position: fixed;
+    top:64px;
+    width: 100%;
+    box-shadow: 1px 2px 1px #d3d3d3;
+    background-color: #eee;
+    height: 50px;
+    line-height: 50px;
+}
+
+.wbdv-clear-both{
+    clear: both;
+}
+
+.wbdv-course-list {
+    margin-top: 50px;
+}
+
+.wbdv-course-row {
+    line-height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.wbdv-course-row:last-child {
+    border-bottom: 0px;
 }

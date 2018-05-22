@@ -16,7 +16,7 @@ class CourseService {
 
     findAllCourses() {
         return fetch(COURSE_API_URL)
-            .then((response) => response.json());
+            .then(response => response.json());
     }
 }
 

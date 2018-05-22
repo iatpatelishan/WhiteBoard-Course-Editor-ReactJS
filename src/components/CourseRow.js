@@ -6,7 +6,12 @@ class CourseRow extends React.Component {
 
     render() {
         return (
-            <tr><td>{this.props.course.title}</td></tr>
+            <div className="row wbdv-course-row">
+                <div className="col-lg-6">{this.props.course.title}</div>
+                <div className="col-lg-2">me</div>
+                <div className="col-lg-2">{this.props.course.lastModified}</div>
+                <div className="col-lg-2">Delete</div>
+            </div>
         )
     }
 }
