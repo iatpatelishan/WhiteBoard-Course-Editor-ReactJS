@@ -4,7 +4,7 @@ const COURSE_API_URL = 'http://localhost:8080/api/course';
 
 class CourseService {
     constructor(singletonToken) {
-        if(_singleton != singletonToken)
+        if(_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
 
