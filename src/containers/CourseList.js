@@ -7,9 +7,14 @@ class CourseList extends Component {
         super();
         this.courseService = CourseService.instance;
         this.state = {courses: []};
+        this.updateCourseList = this.updateCourseList.bind(this);
     }
 
     componentDidMount() {
+        this.updateCourseList();
+    }
+
+    updateCourseList() {
         this.courseService.findAllCourses()
             .then((courses) => {
                 this.setState({courses: courses})
@@ -22,14 +27,14 @@ class CourseList extends Component {
                 <div className="wbdv-course-header">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-6">Title</div>
-                            <div className="col-lg-2">Owned By</div>
-                            <div className="col-lg-2">Last Modified</div>
-                            <div className="col-lg-2">&nbsp;</div>
+                            <div className="col-md-6">Title</div>
+                            <div className="col-md-2">Owned By</div>
+                            <div className="col-md-2">Last Modified</div>
+                            <div className="col-md-2">&nbsp;</div>
                         </div>
                     </div>
                 </div>
-                <div className="wbdv-clear-both"></div>
+                <div className="clearfix"></div>
                 <div className="wbdv-course-list container">
                         {this.courseRows()}
                 </div>
