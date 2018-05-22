@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import CourseManager from './containers/CourseManager';
+import CourseList from './CourseList'
 
 class CourseManager extends Component {
     render() {
         return (
-            <h1>Course Manager</h1>
+            <div>
+                <h1>Course Manager</h1>
+                <CourseList/>
+
+            </div>
         )
     }
 }
