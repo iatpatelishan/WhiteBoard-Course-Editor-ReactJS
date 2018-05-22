@@ -20,7 +20,7 @@ class CreateCourse extends Component{
     }
 
     newCourse() {
-        this.courseService.createCourse(this.state.course);
+        this.courseService.createCourse(this.state.course).then(this.props.updateCourseList);
     }
 
     render(){
