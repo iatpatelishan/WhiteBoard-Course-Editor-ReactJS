@@ -7,7 +7,6 @@ class CourseManager extends Component {
             <div>
                 <h1>Course Manager</h1>
                 <CourseList/>
-
             </div>
         )
     }
