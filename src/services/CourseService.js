@@ -19,6 +19,11 @@ class CourseService {
             .then(response => response.json());
     }
 
+    findCourseById(id) {
+        return fetch(COURSE_API_URL+'/'+id)
+            .then(response => response.json());
+    }
+
     createCourse(course) {
         return fetch(COURSE_API_URL, {
             body: JSON.stringify(course),

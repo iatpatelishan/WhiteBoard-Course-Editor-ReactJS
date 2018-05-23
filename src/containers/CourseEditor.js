@@ -1,24 +1,14 @@
 import React, {Component} from "react";
 import ModuleList from "./modules/ModuleList";
+import CourseService from '../services/CourseService';
+import './CourseEditor.css';
 
 class CourseEditor extends Component {
     constructor(props) {
         super(props);
+        this.courseService = CourseService.instance;
         this.selectCourse = this.selectCourse.bind(this);
-        this.state = {courseId: ''};
-    }
-
-    selectCourse(courseId) {
-        this.setState({courseId: courseId});
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Course {this.state.courseId}</h3>
-                <ModuleList courseId={this.state.courseId}/>
-            </div>
-        );
+        this.state = {courseId: '', course: {}};
     }
 
     componentDidMount() {
@@ -27,6 +17,21 @@ class CourseEditor extends Component {
 
     componentWillReceiveProps(newProps) {
         this.selectCourse(newProps.match.params.courseId);
+    }
+
+    selectCourse(courseId) {
+        return this.courseService.findCourseById(courseId)
+            .then((course) => {
+                this.setState({courseId: courseId, course: course})
+            });
+    }
+
+    render() {
+        return (
+            <div>
+                <ModuleList courseId={this.state.courseId} course={this.state.course}/>
+            </div>
+        );
     }
 
 }
