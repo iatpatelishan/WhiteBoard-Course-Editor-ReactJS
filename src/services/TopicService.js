@@ -38,7 +38,7 @@ class TopicService {
             .catch(() => {return "{}"})
     }
 
-    deleteLesson(topicId) {
+    deleteTopic(topicId) {
         return fetch(TOPIC_API_URL.replace('TOPIC_ID', topicId), {
             method: 'DELETE'
         })
