@@ -80,7 +80,7 @@ export default class ModuleList extends React.Component {
                         .then(() => {
                             this.findAllModulesForCourse(this.state.courseId)
                         }).then(() => {
-                            swal("Poof! Your imaginary file has been deleted!", {
+                            swal("Poof! Module has been deleted!", {
                                 icon: "success",
                             });
                         });
@@ -104,7 +104,7 @@ export default class ModuleList extends React.Component {
 
     showaddModule(event){
         swal({
-            text: 'Create Module.',
+            text: 'Create Module',
             content: "input",
             button: {
                 text: "Create!",

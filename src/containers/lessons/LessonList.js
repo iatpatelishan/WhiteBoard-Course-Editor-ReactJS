@@ -1,6 +1,7 @@
 import React from 'react';
 import LessonService from "../../services/LessonService";
 import LessonListItem from "../lessons/LessonListItem";
+import swal from "sweetalert";
 
 export default class ModuleEditor extends React.Component {
 
@@ -14,6 +15,7 @@ export default class ModuleEditor extends React.Component {
         this.setLessons = this.setLessons.bind(this);
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        this.showaddLesson = this.showaddLesson.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
     }
 
@@ -53,8 +55,8 @@ export default class ModuleEditor extends React.Component {
         this.setState({lessons: lessons});
     }
 
-    setLessonTitle(event) {
-        this.setState({lesson: {title: event.target.value}});
+    setLessonTitle(title) {
+        this.setState({lesson: {title: title}});
     }
 
     createLesson() {
@@ -64,12 +66,62 @@ export default class ModuleEditor extends React.Component {
             })
     }
 
-    deleteLesson(lessonId) {
-        this.lessonService.deleteLesson(lessonId)
+    showaddLesson(){
+        swal({
+            text: 'Create Lesson',
+            content: "input",
+            button: {
+                text: "Create!",
+                closeModal: false,
+            },
+        })
+            .then(name => {
+                if (!name) throw null;
+
+                this.setLessonTitle(name);
+                return this.createLesson();
+            })
             .then(() => {
-                this.findAllLessonsForModule(this.state.moduleId)
+                swal("Poof! New Lesson Added!", {
+                    icon: "success",
+                });
+            })
+            .catch(err => {
+                if (err) {
+                    swal("Oh noes!", "The AJAX request failed!", "error");
+                } else {
+                    swal.stopLoading();
+                    swal.close();
+                }
             });
     }
+
+    deleteLesson(lessonId) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Lesson1!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.lessonService.deleteLesson(lessonId)
+                        .then(() => {
+                            this.findAllLessonsForModule(this.state.moduleId)
+                        })
+                        .then(() => {
+                        swal("Poof! Lesson has been deleted!", {
+                            icon: "success",
+                        });
+                    });
+                }
+            });
+
+
+    }
+
+
 
     renderLessons() {
         var lessons = this.state.lessons.map((lesson) => {
@@ -91,11 +143,10 @@ export default class ModuleEditor extends React.Component {
                             {this.renderLessons()}
                         </ul>
                     </div>
+                    <ul className="nav navbar-nav navbar-right ml-auto">
+                        <li className="nav-item"><i onClick={() => {this.showaddLesson()}} className="fa fa-2x fa-plus text-white"></i></li>
+                    </ul>
                 </nav>
-
-                <input placeholder="New Lesson" value={this.state.lesson.title} onChange={this.setLessonTitle}/>
-                <button onClick={this.createLesson} className="btn btn-primary btn-block">Create</button>
-
             </div>
         )
     }

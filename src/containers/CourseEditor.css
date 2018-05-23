@@ -51,3 +51,15 @@ ul li {
     float:right;
     line-height: 25px !important;
 }
+
+@media (min-width: 992px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: block;
+        background-color: #CCCCCC;
+    }
+}
