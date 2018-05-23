@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import LessonEditor from "../lessons/LessonEditor";
 import swal from "sweetalert";
 
-export default class ModuleEditor extends React.Component {
+export default class LessonTabs extends React.Component {
 
     constructor(props) {
         super(props);

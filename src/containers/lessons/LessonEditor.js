@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import LessonService from "../../services/LessonService";
+import TopicTabs from "../topics/TopicTabs";
 
 export default class LessonEditor extends Component {
     constructor(props) {
@@ -40,8 +41,7 @@ export default class LessonEditor extends Component {
     render(){
         return(
             <div className="container">
-                
-                <h1>this is lesson editor {this.state.lessonId}</h1>
+                <TopicTabs courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId} />
             </div>
         )
     }

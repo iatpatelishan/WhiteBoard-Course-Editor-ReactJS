@@ -95,4 +95,11 @@ ul li {
     min-height: 100vh;
 }
 
+.container-topic{
+    padding: 20px 20px;
+}
 
+.wbdv-topic-close{
+    color:black;
+    margin-left: 10px;
+}
