@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './CourseManager.css';
 import CourseList from './CourseList';
 import CourseEditor from './CourseEditor';
@@ -14,12 +14,11 @@ class CourseManager extends Component {
     render() {
         return (
             <Router>
-
                 <div>
-                    <Route path="/course"
+                    <Route path="/courses"
                            component={CourseList}>
                     </Route>
-                    <Route path="/course/:courseId/edit"
+                    <Route path="/course/:courseId"
                            component={CourseEditor}>
                     </Route>
                 </div>
