@@ -20,7 +20,9 @@ class CreateCourse extends Component{
     }
 
     newCourse() {
-        this.courseService.createCourse(this.state.course).then(this.props.updateCourseList);
+        this.courseService.createCourse(this.state.course)
+            .then(this.props.updateCourseList)
+            .then(this.setState({course: {title: ''}}));
     }
 
     render(){
@@ -30,7 +32,7 @@ class CreateCourse extends Component{
                 <div className="form input-group input-group-lg">
                     <a className="navbar-brand" href="#"><h4>Course Manager</h4></a>
                     <input className="form-control add-course-input" type="text" placeholder="New Course Title"
-                           onChange={this.updateTitleInState}/>
+                           onChange={this.updateTitleInState} value={this.state.course.title} />
                     <div className="wbdv-top-create-outer">
                         <div className="wbdv-top-create-inner">
                         </div>

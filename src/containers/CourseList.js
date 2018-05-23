@@ -6,13 +6,13 @@ import swal from "sweetalert";
 
 
 
-
 class CourseList extends Component {
     constructor() {
         super();
         this.courseService = CourseService.instance;
         this.state = {courses: []};
         this.updateCourseList = this.updateCourseList.bind(this);
+        this.deleteCourseById = this.deleteCourseById.bind(this);
     }
 
     componentDidMount() {
@@ -20,10 +20,18 @@ class CourseList extends Component {
     }
 
     updateCourseList() {
-        this.courseService.findAllCourses()
+        console.log("Finding courses");
+        return this.courseService.findAllCourses()
             .then((courses) => {
-                this.setState({courses: courses})
+                console.log("Updating State after find courses");
+                return this.setState({courses: courses});
             });
+    }
+
+    deleteCourseById(id){
+        console.log("Deleting courses");
+        return this.courseService.deleteCourseById(id)
+            .then(() => this.updateCourseList());
     }
 
     render() {
@@ -59,7 +67,7 @@ class CourseList extends Component {
 
     courseRows() {
         var rows = this.state.courses.map((course) => {
-            return (<CourseRow key={course.id} course={course}/>)
+            return (<CourseRow key={course.id} course={course} deleteCourseById={this.deleteCourseById} />)
         })
         return (
             rows

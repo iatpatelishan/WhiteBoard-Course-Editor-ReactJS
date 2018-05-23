@@ -31,6 +31,12 @@ class CourseService {
         })
     }
 
+    deleteCourseById(id) {
+        return fetch(COURSE_API_URL + '/'+id, {
+            method: 'DELETE'
+        });
+    }
+
 }
 
 export default CourseService;
