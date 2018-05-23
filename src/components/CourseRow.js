@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import Moment from 'moment';
 import swal from "sweetalert";
+import TimeAgo from 'timeago-react';
+import en from 'timeago.js/locales/en';
+
+
 
 class CourseRow extends Component {
     constructor(props) {
@@ -35,15 +39,13 @@ class CourseRow extends Component {
     }
 
     render() {
-        Moment.locale('en');
-        var dt = this.props.course.lastModified;
-
+        var dt = this.props.course.modified;
 
         return (
             <div className="row wbdv-course-row">
                 <div className="col-lg-6">{this.props.course.title}</div>
                 <div className="col-lg-2">me</div>
-                <div className="col-lg-2">{Moment(dt).format('DD MMM, YY')}</div>
+                <div className="col-lg-2"><TimeAgo datetime={dt} locale={en}></TimeAgo></div>
                 <div className="col-lg-2"><i className="fa fa-times fa-2x" onClick={this.alertDelete}></i></div>
             </div>
         )
