@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import CourseRow from '../components/CourseRow';
+import CourseRow from '../../components/CourseRow';
 import CreateCourse from './CreateCourse';
-import CourseService from '../services/CourseService';
+import CourseService from '../../services/CourseService';
 import swal from "sweetalert";
 
 

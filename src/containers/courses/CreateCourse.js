@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CourseService from '../services/CourseService';
+import CourseService from '../../services/CourseService';
 import swal from 'sweetalert';
 
 class CreateCourse extends Component{
