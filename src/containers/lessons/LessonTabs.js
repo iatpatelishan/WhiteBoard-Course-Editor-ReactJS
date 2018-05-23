@@ -1,6 +1,8 @@
 import React from 'react';
 import LessonService from "../../services/LessonService";
 import LessonTabsItem from "../../components/LessonTabsItem";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import LessonEditor from "../lessons/LessonEditor";
 import swal from "sweetalert";
 
 export default class ModuleEditor extends React.Component {
@@ -126,7 +128,7 @@ export default class ModuleEditor extends React.Component {
     renderLessons() {
         var lessons = this.state.lessons.map((lesson) => {
             return (<LessonTabsItem key={lesson.id} lesson={lesson} deleteLesson={this.deleteLesson}
-                                    moduleId={this.state.moduleId}/>)
+                                  courseId={this.state.courseId}  moduleId={this.state.moduleId}/>)
         });
         return (
             lessons
@@ -136,6 +138,7 @@ export default class ModuleEditor extends React.Component {
     render() {
         console.log(this.state);
         return (
+            <Router>
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-dark-clr">
                     <div className="" id="navbarColor01">
@@ -147,7 +150,11 @@ export default class ModuleEditor extends React.Component {
                         <li className="nav-item"><i onClick={() => {this.showaddLesson()}} className="fa fa-2x fa-plus text-white"></i></li>
                     </ul>
                 </nav>
+                <div>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
+                </div>
             </div>
+            </Router>
         )
     }
 }

@@ -11,9 +11,10 @@ export default class LessonTabsItem extends React.Component {
         return (
             <li className="nav-item">
                 <div className='d-inline'>
-                <a href="#" className="nav-link  text-white">
-                    {this.props.lesson.title}
-                </a>
+                    <Link className="nav-link  text-white"
+                          to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
+                        {this.props.lesson.title}
+                    </Link>
                 <span className="close-btn"  onClick={() => {
                 this.props.deleteLesson(this.props.lesson.id)
             }}><i className="fa fa-times-circle-o wbdv-lesson-close"></i></span>
