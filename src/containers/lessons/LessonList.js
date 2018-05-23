@@ -99,7 +99,7 @@ export default class ModuleEditor extends React.Component {
     deleteLesson(lessonId) {
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this Lesson1!",
+            text: "Once deleted, you will not be able to recover this Lesson!",
             icon: "warning",
             buttons: true,
             dangerMode: true,

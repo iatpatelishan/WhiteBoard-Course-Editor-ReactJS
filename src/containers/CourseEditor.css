@@ -1,3 +1,7 @@
+html, body
+{
+    height: 100%;
+}
 .wbdv-module-panel {
     background-color: #363b3e;
     padding: 0px 0px !important;
@@ -7,6 +11,8 @@
     background-color: #363b3e;
     padding: 0px 0px;
     color: #fff;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .wbdv-lesson-panel {
@@ -16,6 +22,19 @@
 .wbdv-module-list li{
     border-radius: 5px;
     margin-bottom: 20px;
+}
+
+.wbdv-module-list-item{
+    background-color: #e8e8e8 !important;
+}
+
+.wbdv-module-list-item a{
+    color: black;
+    display: block;
+}
+.wbdv-module-list-item a:hover{
+    text-decoration: none;
+    color: #4b5154;
 }
 
 .navbar-dark-clr {
@@ -50,16 +69,23 @@ ul li {
 .wbdv-module-close{
     float:right;
     line-height: 25px !important;
+    cursor: pointer;
 }
 
 @media (min-width: 992px) {
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        z-index: 1000;
-        display: block;
-        background-color: #CCCCCC;
+    .wbdv-module-list{
+        height: 100%;
+        position:relative;
     }
+}
+
+.fill{
+    width:100%;
+    height:100%;
+    min-height:100%;
+    display: block;
+}
+
+.wbdv-100vh {
+    min-height: 100vh;
 }

@@ -10,7 +10,7 @@ export default class ModuleList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {courseId: '', course:{}, module: {title: ''}, modules: []};
+        this.state = {courseId: '', course:{}, module: {title: ''}, selectedModule:{title:''}, modules: []};
         this.moduleService = ModuleService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setCourse = this.setCourse.bind(this);
@@ -20,6 +20,7 @@ export default class ModuleList extends React.Component {
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
         this.showaddModule = this.showaddModule.bind(this);
+        this.setSelectedModule = this.setSelectedModule.bind(this);
     }
 
     componentDidMount() {
@@ -31,6 +32,10 @@ export default class ModuleList extends React.Component {
         this.setCourseId(newProps.courseId);
         this.setCourse(newProps.course);
         this.findAllModulesForCourse(newProps.courseId);
+    }
+
+    setSelectedModule(module){
+        this.setState({selectedModule: module});
     }
 
     setCourseId(courseId) {
@@ -91,11 +96,11 @@ export default class ModuleList extends React.Component {
 
     renderModules() {
         var modules = this.state.modules.map((module) => {
-            return (<ModuleListItem key={module.id} module={module} deleteModule={this.deleteModule} courseId={this.state.courseId} />)
+            return (<ModuleListItem key={module.id} module={module} setSelectedModule={this.setSelectedModule} deleteModule={this.deleteModule} courseId={this.state.courseId} />)
         })
         return (
             <div>
-            <ul className="list-group wbdv-module-list">
+            <ul className="list-group wbdv-module-list fill">
                 {modules}
             </ul>
             </div>
@@ -136,7 +141,7 @@ export default class ModuleList extends React.Component {
     render() {
         return (
             <Router>
-            <div className="row">
+            <div className="row wbdv-100vh">
                 <div className="col-lg-3 wbdv-module-panel">
                     <div className="wbdv-top-bar">
                         <nav className="navbar navbar-dark navbar-dark-clr">
