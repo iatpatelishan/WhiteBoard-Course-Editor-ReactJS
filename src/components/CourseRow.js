@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Moment from 'moment';
 import swal from "sweetalert";
 import TimeAgo from 'timeago-react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 class CourseRow extends Component {
@@ -12,7 +12,7 @@ class CourseRow extends Component {
         this.deleteCourse = this.deleteCourse.bind(this);
     }
 
-    deleteCourse(){
+    deleteCourse() {
         var id = this.props.course.id;
         this.props.deleteCourseById(id)
             .then(swal("Poof! Your course has been deleted!", {
@@ -42,7 +42,8 @@ class CourseRow extends Component {
 
         return (
             <div className="row wbdv-course-row">
-                <div className="col-lg-6"><Link to={`/course/${this.props.course.id}`} >{this.props.course.title}</Link></div>
+                <div className="col-lg-6"><i className="fa fa-file-text wbdv-course-icon"></i><Link to={`/course/${this.props.course.id}`}>{this.props.course.title}</Link>
+                </div>
                 <div className="col-lg-2">me</div>
                 <div className="col-lg-2"><TimeAgo datetime={dt} locale={'en'}></TimeAgo></div>
                 <div className="col-lg-2"><i className="fa fa-times fa-2x" onClick={this.alertDelete}></i></div>

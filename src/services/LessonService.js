@@ -19,7 +19,7 @@ class LessonService {
     createLesson(moduleId, lesson) {
         return fetch(MODULE_LESSON_API_URL.replace('MID', moduleId),
             {
-                body: JSON.stringify(module),
+                body: JSON.stringify(lesson),
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
             })
@@ -47,4 +47,4 @@ class LessonService {
 
 }
 
-export default ModuleService;
+export default LessonService;
