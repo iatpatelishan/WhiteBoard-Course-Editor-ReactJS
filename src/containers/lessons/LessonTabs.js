@@ -1,6 +1,6 @@
 import React from 'react';
 import LessonService from "../../services/LessonService";
-import LessonListItem from "../lessons/LessonListItem";
+import LessonTabsItem from "../../components/LessonTabsItem";
 import swal from "sweetalert";
 
 export default class ModuleEditor extends React.Component {
@@ -125,7 +125,7 @@ export default class ModuleEditor extends React.Component {
 
     renderLessons() {
         var lessons = this.state.lessons.map((lesson) => {
-            return (<LessonListItem key={lesson.id} lesson={lesson} deleteLesson={this.deleteLesson}
+            return (<LessonTabsItem key={lesson.id} lesson={lesson} deleteLesson={this.deleteLesson}
                                     moduleId={this.state.moduleId}/>)
         });
         return (

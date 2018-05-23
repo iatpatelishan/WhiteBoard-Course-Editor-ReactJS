@@ -1,6 +1,6 @@
 import React from 'react';
 import LessonService from "../../services/LessonService";
-import LessonList from "../lessons/LessonList";
+import LessonTabs from "../lessons/LessonTabs";
 
 export default class ModuleEditor extends React.Component {
 
@@ -34,7 +34,7 @@ export default class ModuleEditor extends React.Component {
     render() {
         return (
             <div>
-                <LessonList courseId={this.state.courseId} moduleId={this.state.moduleId} />
+                <LessonTabs courseId={this.state.courseId} moduleId={this.state.moduleId} />
             </div>
         );
     }
