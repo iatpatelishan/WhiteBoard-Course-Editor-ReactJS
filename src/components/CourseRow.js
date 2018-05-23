@@ -3,6 +3,8 @@ import Moment from 'moment';
 import swal from "sweetalert";
 import TimeAgo from 'timeago-react';
 import en from 'timeago.js/locales/en';
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -43,7 +45,7 @@ class CourseRow extends Component {
 
         return (
             <div className="row wbdv-course-row">
-                <div className="col-lg-6">{this.props.course.title}</div>
+                <div className="col-lg-6"><Link to={`/course/${this.props.course.id}/edit`} >{this.props.course.title}</Link></div>
                 <div className="col-lg-2">me</div>
                 <div className="col-lg-2"><TimeAgo datetime={dt} locale={en}></TimeAgo></div>
                 <div className="col-lg-2"><i className="fa fa-times fa-2x" onClick={this.alertDelete}></i></div>
