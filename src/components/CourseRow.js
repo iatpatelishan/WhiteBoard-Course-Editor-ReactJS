@@ -5,8 +5,6 @@ import TimeAgo from 'timeago-react';
 import { Link } from 'react-router-dom'
 
 
-
-
 class CourseRow extends Component {
     constructor(props) {
         super(props);
