@@ -9,15 +9,14 @@ export default class ModuleListItem extends React.Component {
 
     render() {
         return (
-            <li className="list-group-item">
+            <li className="list-group-item wbdv-module-list-item">
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.module.title}
                 </Link>
 
-                <button onClick={() => {
+                <i onClick={() => {
                     this.props.deleteModule(this.props.module.id)
-                }}>Delete
-                </button>
+                }} className="fa fa-times-circle-o wbdv-module-close"></i>
             </li>
         )
     }

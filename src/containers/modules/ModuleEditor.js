@@ -1,10 +1,13 @@
 import React from 'react';
+import LessonService from "../../services/LessonService";
+import LessonList from "../lessons/LessonList";
 
 export default class ModuleEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {courseId: '', moduleId: ''};
+        this.state = {courseId: '', moduleId: '', lessons: []};
+        this.lessonService = LessonService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
     }
@@ -17,7 +20,6 @@ export default class ModuleEditor extends React.Component {
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
-        this.findAllLessonsForModule(newProps.courseId);
     }
 
     setCourseId(courseId) {
@@ -26,23 +28,14 @@ export default class ModuleEditor extends React.Component {
     }
 
     setModuleId(moduleId) {
-        this.setState
-        ({moduleId: moduleId});
+        this.setState({moduleId: moduleId});
     }
-
-    findAllLessonsForModule(courseId){
-
-    }
-
 
     render() {
         return (
             <div>
-
-                <h1>Module Editor</h1>
-                {this.state.courseId},
-                {this.state.moduleId}
-                </div>
-        )
+                <LessonList courseId={this.state.courseId} moduleId={this.state.moduleId} />
+            </div>
+        );
     }
 }

@@ -1,12 +1,53 @@
 .wbdv-module-panel {
     background-color: #363b3e;
+    padding: 0px 0px !important;
+}
+
+.wbdv-top-bar {
+    background-color: #363b3e;
+    padding: 0px 0px;
+    color: #fff;
+}
+
+.wbdv-lesson-panel {
+    padding: 0px 0px !important;
+}
+
+.wbdv-module-list li{
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .navbar-dark-clr {
     background-color: #454b4f !important;
-    margin-right: -15px;
+    min-height: 60px;
 }
 
 .list-group-item {
     background-color: #4b5154;
+}
+
+ul li {
+    position: relative;
+    padding-right: 30px;
+}
+
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    padding: 12px 16px;
+    transform: translate(0%, -50%);
+    font-color: white;
+    line-height: 55px;
+}
+
+.wbdv-lesson-close{
+    font-size: 30px;
+}
+
+.wbdv-module-close{
+    float:right;
+    line-height: 25px !important;
 }

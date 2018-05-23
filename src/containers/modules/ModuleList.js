@@ -3,6 +3,7 @@ import ModuleService from '../../services/ModuleService';
 import ModuleListItem from '../modules/ModuleListItem';
 import ModuleEditor from '../modules/ModuleEditor';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import swal from "sweetalert";
 
 
 export default class ModuleList extends React.Component {
@@ -18,6 +19,7 @@ export default class ModuleList extends React.Component {
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        this.showaddModule = this.showaddModule.bind(this);
     }
 
     componentDidMount() {
@@ -53,8 +55,8 @@ export default class ModuleList extends React.Component {
         this.setState({modules: modules})
     }
 
-    setModuleTitle(event) {
-        this.setState({module: {title: event.target.value}});
+    setModuleTitle(title) {
+        this.setState({module: {title: title}});
     }
 
     createModule() {
@@ -65,10 +67,26 @@ export default class ModuleList extends React.Component {
     }
 
     deleteModule(moduleId) {
-        this.moduleService.deleteModule(moduleId)
-            .then(() => {
-                this.findAllModulesForCourse(this.state.courseId)
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Module!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.moduleService.deleteModule(moduleId)
+                        .then(() => {
+                            this.findAllModulesForCourse(this.state.courseId)
+                        }).then(() => {
+                            swal("Poof! Your imaginary file has been deleted!", {
+                                icon: "success",
+                            });
+                        });
+                }
             });
+
     }
 
     renderModules() {
@@ -76,29 +94,61 @@ export default class ModuleList extends React.Component {
             return (<ModuleListItem key={module.id} module={module} deleteModule={this.deleteModule} courseId={this.state.courseId} />)
         })
         return (
-            <ul className="list-group">{modules}</ul>
+            <div>
+            <ul className="list-group wbdv-module-list">
+                {modules}
+            </ul>
+            </div>
         )
+    }
+
+    showaddModule(event){
+        swal({
+            text: 'Create Module.',
+            content: "input",
+            button: {
+                text: "Create!",
+                closeModal: false,
+            },
+        })
+            .then(name => {
+                if (!name) throw null;
+
+                this.setModuleTitle(name);
+                return this.createModule();
+            })
+            .then(() => {
+                swal("Poof! New Module Added!", {
+                    icon: "success",
+                });
+            })
+            .catch(err => {
+                if (err) {
+                    swal("Oh noes!", "The AJAX request failed!", "error");
+                } else {
+                    swal.stopLoading();
+                    swal.close();
+                }
+            });
     }
 
 
     render() {
-        console.log(this.state);
         return (
             <Router>
             <div className="row">
-                <div className="col-3 wbdv-module-panel">
-                    <div className="top-bar">
+                <div className="col-lg-3 wbdv-module-panel">
+                    <div className="wbdv-top-bar">
                         <nav className="navbar navbar-dark navbar-dark-clr">
-                            <a className="navbar-brand" href="#">{this.state.course.title}</a>
+                            <a className="navbar-brand">{this.state.course.title}</a>
                         </nav>
                     </div>
-                    <input placeholder="New Module" value={this.state.module.title} onChange={this.setModuleTitle}/>
-                    <button onClick={this.createModule} className="btn btn-primary btn-block">Create</button>
-
-                    <hr/>
-                    {this.renderModules()}
+                    <div className="container wbdv-margin-top-20">
+                        {this.renderModules()}
+                        <i onClick={() => {this.showaddModule()}} className="fa fa-2x fa-plus text-white wbdv-module-add"></i>
+                    </div>
                 </div>
-                <div className="col-9">
+                <div className="col-lg-9 wbdv-lesson-panel">
                     <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
                 </div>
             </div>

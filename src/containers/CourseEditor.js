@@ -28,7 +28,7 @@ class CourseEditor extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <ModuleList courseId={this.state.courseId} course={this.state.course}/>
             </div>
         );

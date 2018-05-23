@@ -84,6 +84,24 @@ body{
     }
 }
 
+.wbdv-margin-top-20{
+    margin-top: 20px;
+}
+
+.wbdv-module-list-item{
+    padding: 0.50rem 1.25rem !important;
+}
+
+.wbdv-module-add{
+    padding-left: -10px;
+    margin-left: 45%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.wbdv-course-icon{
+    margin-right: 10px;
+}
 
 .wbdv-course-list {
     margin-top: 50px;

@@ -75,7 +75,7 @@ export default class ModuleEditor extends React.Component {
         var lessons = this.state.lessons.map((lesson) => {
             return (<LessonListItem key={lesson.id} lesson={lesson} deleteLesson={this.deleteLesson}
                                     moduleId={this.state.moduleId}/>)
-        })
+        });
         return (
             lessons
         )
@@ -87,7 +87,7 @@ export default class ModuleEditor extends React.Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-dark-clr">
                     <div className="" id="navbarColor01">
-                        <ul class="navbar-nav mr-auto">
+                        <ul className="navbar-nav mr-auto">
                             {this.renderLessons()}
                         </ul>
                     </div>
