@@ -35,7 +35,7 @@ class LessonService {
             .then(function (response) {
                 return response.json();
             })
-            .catch(() => {return "{}"})
+            .catch(() => {return "[]"})
     }
 
     deleteLesson(lessonId) {

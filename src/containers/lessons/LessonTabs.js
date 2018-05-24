@@ -71,7 +71,13 @@ export default class LessonTabs extends React.Component {
     showaddLesson(){
         swal({
             text: 'Create Lesson',
-            content: "input",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Lesson Name",
+                    type: "text"
+                }
+            },
             button: {
                 text: "Create!",
                 closeModal: false,

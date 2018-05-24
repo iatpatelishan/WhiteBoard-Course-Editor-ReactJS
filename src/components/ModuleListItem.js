@@ -9,10 +9,10 @@ export default class ModuleListItem extends React.Component {
 
     render() {
         return (
-            <li className="list-group-item wbdv-module-list-item">
-                <div className="row">
+            <li className={"list-group-item wbdv-module-list-item "+this.props.className}>
+                <div className="row" onClick={()=> {this.props.setActive(this.props.module.id)}}>
                 <div className="col-10">
-                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
+                <Link className="wbdv-module-link" to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.module.title}
                 </Link>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ModuleService from '../../services/ModuleService';
 import ModuleListItem from '../../components/ModuleListItem';
 import ModuleEditor from '../modules/ModuleEditor';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import swal from "sweetalert";
 
 
@@ -10,10 +10,11 @@ export default class ModuleList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {courseId: '', course:{}, module: {title: ''}, selectedModule:{title:''}, modules: []};
+        this.state = {courseId: '', course:{}, module: {title: ''}, selectedModule:{title:''}, modules: [], active:''};
         this.moduleService = ModuleService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setCourse = this.setCourse.bind(this);
+        this.setActive = this.setActive.bind(this);
         this.findAllModulesForCourse = this.findAllModulesForCourse.bind(this);
         this.setModules = this.setModules.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
@@ -44,6 +45,10 @@ export default class ModuleList extends React.Component {
 
     setCourse(course) {
         this.setState({course: course});
+    }
+
+    setActive(id){
+        this.setState({active: id});
     }
 
     findAllModulesForCourse(courseId) {
@@ -96,8 +101,16 @@ export default class ModuleList extends React.Component {
 
     renderModules() {
         var modules = this.state.modules.map((module) => {
-            return (<ModuleListItem key={module.id} module={module} setSelectedModule={this.setSelectedModule} deleteModule={this.deleteModule} courseId={this.state.courseId} />)
-        })
+            const className = this.state.active == module.id ? 'wbdv-module-active': '';
+            return (<ModuleListItem key={module.id}
+                                    module={module}
+                                    setSelectedModule={this.setSelectedModule}
+                                    deleteModule={this.deleteModule}
+                                    courseId={this.state.courseId}
+                                    setActive={this.setActive}
+                                    className={className}
+            />)
+        });
         return (
             <div>
             <ul className="list-group wbdv-module-list fill">
@@ -110,7 +123,13 @@ export default class ModuleList extends React.Component {
     showaddModule(event){
         swal({
             text: 'Create Module',
-            content: "input",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Module Name",
+                    type: "text"
+                }
+            },
             button: {
                 text: "Create!",
                 closeModal: false,
@@ -145,7 +164,10 @@ export default class ModuleList extends React.Component {
                 <div className="col-lg-3 wbdv-module-panel">
                     <div className="wbdv-top-bar">
                         <nav className="navbar navbar-dark navbar-dark-clr">
-                            <a className="navbar-brand">{this.state.course.title}</a>
+                            <a className="navbar-brand">
+                                <a className="text-white" href={`/courses`}><i className="fa fa-times wbdv-close-editor"></i></a>
+                                <span>{this.state.course.title}</span>
+                            </a>
                         </nav>
                     </div>
                     <div className="container wbdv-margin-top-20">

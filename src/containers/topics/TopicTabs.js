@@ -78,7 +78,14 @@ export default class TopicTabs extends React.Component {
     showaddTopic() {
         swal({
             text: 'Create Topic',
-            content: "input",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Topic Name",
+                    type: "text"
+                }
+            },
+            inputPlaceholder: 'Topic Name',
             button: {
                 text: "Create!",
                 closeModal: false,

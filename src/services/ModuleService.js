@@ -35,7 +35,7 @@ class ModuleService {
             .then(function (response) {
                 return response.json();
             })
-            .catch(() => {return "{}"})
+            .catch(() => {return "[]"})
     }
 
     deleteModule(moduleId) {

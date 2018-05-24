@@ -101,5 +101,26 @@ ul li {
 
 .wbdv-topic-close{
     color:black;
-    margin-left: 10px;
+    margin-left: 0px;
+}
+
+.wbdv-close-editor{
+    margin-right: 10px;
+}
+
+.wbdv-module-link{
+    overflow: hidden;
+}
+
+.nav-item{
+    height: 40px;
+}
+
+.close-btn {
+    padding: 0px 0px;
+    margin: 0px 15px;
+}
+
+.wbdv-module-active{
+    background-color: #007bff !important;
 }

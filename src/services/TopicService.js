@@ -35,7 +35,7 @@ class TopicService {
             .then(function (response) {
                 return response.json();
             })
-            .catch(() => {return "{}"})
+            .catch(() => {return "[]"})
     }
 
     deleteTopic(topicId) {
