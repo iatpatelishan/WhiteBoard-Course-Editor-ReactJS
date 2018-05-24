@@ -1,3 +1,8 @@
+
+This project uses Spring Boot for backend server. [View Repository](https://github.com/iatpatelishan/cs5610-summer1-2018-java-server-patel).
+
+## Additional Details for React
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
