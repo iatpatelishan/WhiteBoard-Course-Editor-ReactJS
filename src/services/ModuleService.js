@@ -1,6 +1,6 @@
 let _singleton = Symbol();
-const COURSE_MODULE_API_URL = 'http://localhost:8080/api/course/CID/module';
-const MODULE_API_URL = 'http://localhost:8080/api/module/MODULE_ID';
+const COURSE_MODULE_API_URL = process.env.REACT_APP_JAVA_SERVER+'/api/course/CID/module';
+const MODULE_API_URL = process.env.REACT_APP_JAVA_SERVER+'/api/module/MODULE_ID';
 
 
 class ModuleService {

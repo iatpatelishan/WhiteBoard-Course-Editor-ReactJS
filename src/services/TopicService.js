@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const LESSON_TOPIC_API_URL = 'http://localhost:8080/api/lesson/LID/topic';
+const LESSON_TOPIC_API_URL = process.env.REACT_APP_JAVA_SERVER + '/api/lesson/LID/topic';
 const TOPIC_API_URL = 'http://localhost:8080/api/topic/TOPIC_ID';
 
 

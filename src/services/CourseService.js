@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const COURSE_API_URL = 'http://localhost:8080/api/course';
+const COURSE_API_URL = process.env.REACT_APP_JAVA_SERVER+'/api/course';
 
 
 class CourseService {
