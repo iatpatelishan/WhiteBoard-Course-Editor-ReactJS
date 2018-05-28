@@ -6,19 +6,16 @@ import AddWidgetComponent from '../../components/AddWidget';
 
 
 const WidgetListComponent = ({widgets}) => (
-    <div>
-        <h1>Widget Editor</h1>
-
-        <div className="btn btn-primary">
-            Save
-        </div>
-        <div className="btn btn-primary">
+    <div className="wbdv-widget-editor">
+        <button type="button" className="btn btn-primary float-right wbdv-wdgt-save">
             Preview
-        </div>
+        </button>
+        <button type="button" className="btn btn-success float-right wbdv-wdgt-save">
+            <i className="fa fa-save"></i>            Save
+        </button>
+        <div className="clearfix"></div>
 
-        <ul>
-            {widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}
-        </ul>
+        {widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}
 
         <AddWidgetComponent />
     </div>

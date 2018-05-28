@@ -6,7 +6,9 @@ const widgets = (state = [], action) => {
             return [...state,
                 {
                     id: state.length + 1,
-                    text: action.text
+                    text: 'New Widget',
+                    widgetType: 'Heading',
+                    size: '1'
                 }]
         case 'DELETE_WIDGET':
             return state.filter(widget => widget.id != action.id)

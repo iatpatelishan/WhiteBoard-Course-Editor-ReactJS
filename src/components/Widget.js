@@ -2,21 +2,20 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import * as actions from "../actions"
 
-export const Widget = ({widget, dispatch}) => {
+export const Widget = ({widget, moveUp, deleteWidget, setWidgetType, toggleEditing}) => {
     let select;
     let editing;
     return (
-        <li>{widget.text}
+        <div className="row">
+            {widget.text} {widget.id}
 
-            <span className="btn btn-primary" onClick={() => { dispatch(moveUp(widget)) }}> ^ </span>
+            <span className="btn btn-primary" onClick={() => (moveUp(widget))}> ^ </span>
 
-            <span className="btn btn-primary" onClick={e => { dispatch(deleteWidget(widget.id)) }}> Delete </span>
+            <span className="btn btn-primary" onClick={e => deleteWidget(widget.id)}> Delete </span>
 
             <select ref={node => select = node}
                     value={widget.widgetType}
-                    onChange={e => {
-                        dispatch(setWidgetType(widget.id, select.value))
-                    }}>
+                    onChange={e => setWidgetType(widget.id, select.value)}>
                 <option>Heading</option>
                 <option>Paragraph</option>
                 <option>HTML</option>
@@ -27,10 +26,7 @@ export const Widget = ({widget, dispatch}) => {
             <label>
                 <input ref={node => editing = node}
                        type="checkbox"
-                       onChange={e => {
-                           dispatch(toggleEditing
-                           (widget.id, editing.checked))
-                       }}
+                       onChange={e => toggleEditing(widget.id, editing.checked)}
                        checked={widget.editing}/> Editing
             </label>
 
@@ -50,62 +46,19 @@ export const Widget = ({widget, dispatch}) => {
 
 
             </div>
-        </li>
+        </div>
     )
 }
-const WidgetComponent = connect()(Widget)
+
+const dispatcherToPropsMapper = (dispatch) => ({
+    toggleEditing : (id, checked) => actions.toggleEditing(dispatch, id, checked),
+    deleteWidget: (id) => actions.deleteWidget(dispatch, id),
+    moveUp: (id) => actions.moveUp(dispatch, id),
+    setWidgetType: (id, widgetType) => actions.setWidgetType(dispatch, id, widgetType)
+})
+
+const WidgetComponent = connect(null,dispatcherToPropsMapper)(Widget)
 export default WidgetComponent
 
-const RawTextWidgetComponent = ({widget, dispatch}) => {
-    let preview;
-    let textarea;
-    return (
-        <div>
-            <h1>Raw Text Widget</h1>
-            <textarea ref={node => textarea = node}
-                      value={widget.rawtext}
-                      onChange={e => {
-                          dispatch(setTextWidget(widget.id,
-                              textarea.value))
-                          preview.innerHTML = textarea.value
-                      }}></textarea>
-            <p ref={node => preview = node}></p>
-        </div>
-
-    )
-}
-const RawTextWidget = connect()
-(RawTextWidgetComponent)
-
-const setTextWidget = (id, text) => (
-    {type: 'SET_TEXT_WIDGET', id: id, text: text})
 
 
-const toggleEditing = (id, checked) => {
-    return {
-        type: 'TOGGLE_EDITING',
-        id: id,
-        editing: checked
-    }
-}
-
-
-const setWidgetType = (id, widgetType) => {
-    return {
-        type: 'SET_WIDGET_TYPE',
-        widgetType: widgetType, id: id
-    }
-}
-
-
-const deleteWidget = id => {
-    return {
-        type: 'DELETE_WIDGET', id: id
-    }
-};
-
-const moveUp = widget => {
-    return {
-        type: 'MOVE_UP', widget: widget
-    }
-}

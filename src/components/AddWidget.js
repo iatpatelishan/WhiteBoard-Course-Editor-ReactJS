@@ -3,11 +3,9 @@ import {connect} from "react-redux";
 import * as actions from "../actions"
 
 const AddWidget = ({addWidget}) => {
-    let input;
     return (
         <div>
-            <input ref={node => input = node}/>
-            <button type="submit" onClick={() => addWidget(input.value)}>Add Widget
+            <button type="button" className="btn btn-danger float-right wbdv-margin-top-20" onClick={addWidget}><i className="fa fa-plus-circle"></i>
             </button>
         </div>
     )
@@ -18,7 +16,7 @@ const stateToPropertiesMapper = state => ({
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    addWidget: (input) => actions.addWidget(dispatch,input)
+    addWidget: () => actions.addWidget(dispatch)
 });
 
 const AddWidgetComponent = connect(null, dispatcherToPropsMapper)(AddWidget);
