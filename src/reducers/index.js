@@ -1,13 +1,9 @@
 import { combineReducers } from 'redux'
-
+import widgets from './widgets'
 
 
 const RootReducer = combineReducers({
-    widgets: widgets
+    widgets
 });
-
-const widgets = (state = [], action) => {
-    return state;
-}
 
 export default RootReducer;
