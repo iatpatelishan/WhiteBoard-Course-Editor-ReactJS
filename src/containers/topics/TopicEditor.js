@@ -1,4 +1,9 @@
 import React, {Component} from "react";
+import WidgetApp from "../widget/WidgetApp";
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import RootReducer from "../../reducers"
+
 
 export default class TopicEditor extends Component {
     constructor(props) {
@@ -42,11 +47,13 @@ export default class TopicEditor extends Component {
     }
 
 
+
     render(){
+        let store = createStore(RootReducer);
         return(
-            <div className="container">
-                {this.state.topicId} TOPIC HERE
-            </div>
+            <Provider store={store}>
+                <WidgetApp />
+            </Provider>
         )
     }
 }
