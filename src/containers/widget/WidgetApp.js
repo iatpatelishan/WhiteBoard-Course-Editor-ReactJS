@@ -4,18 +4,17 @@ import {connect} from "react-redux";
 
 const App = () => (
     <div>
-        <WidgetList />
-        <AddWidget />
+        <WidgetList/>
+        <AddWidget/>
     </div>
 );
-
 
 
 const mapStateToProps = state => ({
     widgets: state.widgets
 });
 
-const WidgetListComponent = ({ widgets }) => (
+const WidgetListComponent = ({widgets}) => (
     <ul>
         {widgets.map(widget =>
             <Widget key={widget.id}
@@ -25,13 +24,22 @@ const WidgetList = connect(mapStateToProps)(WidgetListComponent);
 
 
 const WidgetComponent
-    = ({ widget, deleteWidget, dispatch}) => (
+    = ({widget, dispatch}) => (
     <li>{widget.text}
         <button onClick={e => {
-            dispatch({type: 'DELETE_WIDGET',
-                id: widget.id})}}>
-            Delete</button></li>)
+            dispatch(deleteWidget(widget.id))
+        }}>
+            Delete
+        </button>
+    </li>)
 const Widget = connect()(WidgetComponent)
+
+
+const deleteWidget = id => {
+    return {
+        type: 'DELETE_WIDGET', id: id
+    }
+};
 
 
 let nextWidgetId = 0;
@@ -41,18 +49,21 @@ const AddWidgetComponent = ({dispatch}) => {
         <div>
             <input ref={node => input = node}/>
             <button type="submit" onClick={e => {
-                dispatch({
-                    type: 'ADD_WIDGET',
-                    id: nextWidgetId++,
-                    text: input.value
-                })
+                dispatch(addWidget(input.value))
             }}>Add Widget
             </button>
-        </div>)
+        </div>
+    )
 };
 const AddWidget = connect(mapStateToProps)(AddWidgetComponent);
 
-
+const addWidget = text => {
+    return {
+        type: 'ADD_WIDGET',
+        id: nextWidgetId++,
+        text: text
+    }
+}
 
 
 export default App
