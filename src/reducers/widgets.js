@@ -3,7 +3,7 @@ const widgets = (state = [], action) => {
         case 'ADD_WIDGET':
             return [...state,
                 {
-                    id: state.widgets.length + 1,
+                    id: state.length + 1,
                     text: action.text
                 }]
         case 'DELETE_WIDGET':
