@@ -19,8 +19,23 @@ const widgets = (state = [], action) => {
             index = newState.findIndex(function (widget) {
                 return widget.id === action.id})
             newState[index].widgetType = action.widgetType
+            return newState;
+        case 'TOGGLE_EDITING':
+            newState = JSON.parse(JSON.stringify(state))
+            index = newState.findIndex(
+                function (widget) {
+                    return widget.id === action.id
+                })
+            newState[index].editing = action.editing
+            console.log(newState)
             return newState
-
+        case 'SET_TEXT_WIDGET':
+            newState = JSON.parse(JSON.stringify(state))
+            index = newState.findIndex(
+                function (widget) { return widget.id === action.id })
+            newState[index].rawtext = action.text
+            console.log(newState)
+            return newState
         default:
             return state
     }
