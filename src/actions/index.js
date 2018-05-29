@@ -33,6 +33,12 @@ export const deleteWidget = (dispatch,id) => (
     })
 );
 
+export const cloneWidget = (dispatch,widget) => (
+    dispatch({
+        type: constants.CLONE_WIDGET, widget: widget
+    })
+);
+
 
 export const moveUp = (dispatch,widget) => (
     dispatch({

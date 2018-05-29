@@ -88,6 +88,11 @@ body{
     margin-top: 20px;
 }
 
+.wbdv-margin-left-right-20{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .wbdv-module-list-item{
     padding: 0.50rem 1.25rem !important;
 }
@@ -118,4 +123,21 @@ body{
 .wbdv-course-manager{
     position: relative;
     margin-top: 130px;
+}
+
+.wbdv-display-block{
+    display: block !important;
+}
+
+.wbdv-wdgt-btn{
+    margin-left: 10px;
+}
+
+.container-topic{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.wbdv-widget-select {
+    max-width: 150px;
 }

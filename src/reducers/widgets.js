@@ -1,19 +1,30 @@
-import * as constants from "../constants";
 import 'array.prototype.move';
 import WidgetService from '../services/WidgetService';
+import * as constants from "../constants";
 
 const widgets = (state = [], action) => {
+    let maxid=0;
+    Object.keys(state).forEach(function(key) {
+        if(state[key].id > maxid){
+            maxid=state[key].id
+        }
+    });
+
     switch (action.type) {
         case 'ADD_WIDGET':
             return [...state,
                 {
-                    id: state.length + 1,
+                    id: maxid + 1,
                     text: 'New Widget',
                     widgetType: 'Heading',
                     size: '1'
                 }]
-        case 'DELETE_WIDGET':
+        case constants.DELETE_WIDGET:
             return state.filter(widget => widget.id != action.id)
+        case constants.CLONE_WIDGET:
+            let widget = JSON.parse(JSON.stringify(action.widget));
+            widget.id = maxid+1;
+            return [...state, widget];
         case 'MOVE_UP':
             let index = state.indexOf(action.widget);
             state.move(index, index - 1);
