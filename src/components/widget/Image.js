@@ -7,7 +7,7 @@ const Image = ({widget, preview, widgetNameChanged, imageUrlChanged}) => {
     let imageUrlElem
     return(
         <div>
-            <div hidden={preview} className="wbdv-single-widget-edit">
+            <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Widget Name</label>
@@ -33,7 +33,7 @@ const Image = ({widget, preview, widgetNameChanged, imageUrlChanged}) => {
                 <hr/>
                 <h3>Preview</h3>
             </div>
-            <img src={widget.href} alt=""/>
+            <img src={widget.src} alt=""/>
         </div>
     )
 }

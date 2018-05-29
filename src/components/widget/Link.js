@@ -8,7 +8,7 @@ const Link = ({widget, preview, widgetNameChanged, linkTextChanged, linkUrlChang
     let linkUrlElem
     return(
         <div>
-            <div hidden={preview} className="wbdv-single-widget-edit">
+            <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Widget Name</label>
@@ -44,7 +44,7 @@ const Link = ({widget, preview, widgetNameChanged, linkTextChanged, linkUrlChang
                 <hr/>
                 <h3>Preview</h3>
             </div>
-            <a href={widget.href}>{widget.text}</a>
+            <a href={widget.href} target="_blank">{widget.text}</a>
         </div>
     )
 }

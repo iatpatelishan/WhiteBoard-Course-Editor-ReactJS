@@ -7,7 +7,7 @@ const Paragraph = ({widget, preview, widgetNameChanged, paragraphTextChanged}) =
     let paragraphTextElem
     return(
         <div>
-            <div hidden={preview} className="wbdv-single-widget-edit">
+            <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Widget Name</label>

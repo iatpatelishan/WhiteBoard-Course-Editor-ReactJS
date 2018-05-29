@@ -8,7 +8,7 @@ const Heading = ({widget, preview, widgetNameChanged, headingTextChanged, headin
     let headingTextElem
     return(
         <div>
-            <div hidden={preview} className="wbdv-single-widget-edit">
+            <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Widget Name</label>

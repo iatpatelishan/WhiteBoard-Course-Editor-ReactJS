@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import * as actions from "../../actions"
 import WidgetComponent from '../../components/Widget';
 import AddWidgetComponent from '../../components/AddWidget';
-
+import swal from "sweetalert";
 
 class WidgetListComponent extends Component {
 
@@ -14,6 +14,12 @@ class WidgetListComponent extends Component {
 
     componentWillReceiveProps(newProps) {
         if(newProps.topicId != newProps.topicIdFromTopicEditor){
+            document.addEventListener("keydown", function(e) {
+                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                    e.preventDefault();
+                    newProps.save(newProps.topicIdFromTopicEditor);
+                }
+            }, false);
             newProps.findAllWidgets(newProps.topicIdFromTopicEditor);
         }
     }
@@ -23,13 +29,16 @@ class WidgetListComponent extends Component {
     }
 
     render() {
+        let previewElem;
         return (
-            <div className="wbdv-widget-editor">{this.props.topicId}
-                <button type="button" className="btn btn-primary float-right wbdv-wdgt-save">
-                    Preview
-                </button>
+            <div className="wbdv-widget-editor wbdv-overflow-hidden">
+
+                <label className="float-right switch wbdv-wdgt-save" onClick={() => this.props.togglePreview(previewElem.checked)}>
+                    <input type="checkbox" checked={this.props.preview} ref={node => previewElem = node} />
+                        <span className="slider round"></span>
+                </label>
                 <button type="button" className="btn btn-success float-right wbdv-wdgt-save" onClick={() => this.props.save(this.props.topicId)}>
-                    <i className="fa fa-save"></i> Save
+                    <i className="fa fa-save"></i> Save (Ctrl+S)
                 </button>
                 <div className="clearfix"></div>
 
@@ -44,12 +53,21 @@ class WidgetListComponent extends Component {
 const stateToPropertiesMapper = (state, ownProps) => ({
     widgets: state.widgets,
     topicId: state.topicId,
+    preview: state.preview,
     topicIdFromTopicEditor : ownProps.topicId
 });
 
 const dispatcherToPropsMapper = dispatch => ({
     findAllWidgets: (topicId) => actions.findAllWidgets(dispatch,topicId),
-    save: (topicId) => actions.save(dispatch,topicId)
+    togglePreview: (preview) => actions.togglePreview(dispatch, preview),
+    save: (topicId) => {
+        swal({
+           title:"Saved!",
+            text:"Changes have been saved",
+            type:"success",
+            buttons: false,
+            timer: 1000});
+        return actions.save(dispatch,topicId)}
 });
 
 const WidgetList = connect(stateToPropertiesMapper, dispatcherToPropsMapper)(WidgetListComponent);

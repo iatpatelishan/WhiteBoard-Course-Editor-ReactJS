@@ -14,7 +14,7 @@ const List = ({widget, preview, widgetNameChanged, listItemsChanged, listTypeCha
     let listTypeElem
     return(
         <div>
-            <div hidden={preview} className="wbdv-single-widget-edit">
+            <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Widget Name</label>

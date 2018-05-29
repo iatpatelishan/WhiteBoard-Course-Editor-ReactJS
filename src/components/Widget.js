@@ -10,19 +10,19 @@ import Paragraph from "./widget/Paragraph"
 
 
 
-export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType, toggleEditing}) => {
+export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType, enableEditing, toggleEditing, preview}) => {
     let select;
     let editing;
     return (
         <div className="card wbdv-margin-top-10">
-            <div className="card-body wbdv-margin-left-right-20">
+            <div className="card-body wbdv-margin-left-right-20" onClick={e => {if(preview){enableEditing(widget.id)}}}>
                 <div className="row wbdv-display-block">
-                    <div>
-                        <span className="btn btn-danger wbdv-wdgt-btn float-right" onClick={e => deleteWidget(widget.id)}> <i className="fa fa-times"></i> </span>
+                    <div style={{display: widget.editing ? 'block' : 'none'}}>
+                        <span className="btn btn-danger wbdv-wdgt-btn float-right" onClick={e => deleteWidget(widget.id)} title="Delete Widget"> <i className="fa fa-times"></i> </span>
 
 
 
-                        <span className="btn btn-light wbdv-wdgt-btn float-right" onClick={() => cloneWidget(widget)}> <i className="fa fa-clone"></i> </span>
+                        <span className="btn btn-light wbdv-wdgt-btn float-right" onClick={() => cloneWidget(widget)} title="Clone Widget"> <i className="fa fa-clone"></i> </span>
 
                         <select  className="form-control form-inline wbdv-wdgt-btn float-right wbdv-widget-select" ref={node => select = node}
                                  value={widget.widgetType}
@@ -36,8 +36,11 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
 
                         <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-up"></i> </span>
                         <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-down"></i> </span>
+                        <h3>{widget.widgetType} Widget</h3>
                     </div>
-                    <h3>{widget.widgetType} Widget</h3>
+
+
+
                 </div>
 
                 <div className="row wbdv-display-block">
@@ -51,43 +54,25 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
 
 
 
-    {/*            <label>
-                    <input ref={node => editing = node}
-                           type="checkbox"
-                           onChange={e => toggleEditing(widget.id, editing.checked)}
-                           checked={widget.editing}/> Editing
-                </label>
-
-                <div style={{display: widget.editing ? 'block' : 'none'}}>
-                    <div style={{
-                        display: widget.widgetType
-                        === 'Heading' ? 'block' : 'none'
-                    }}>
-                        Heading
-                    </div>
-                    <div style={{
-                        display: widget.widgetType
-                        === 'Paragraph' ? 'block' : 'none'
-                    }}>
-                        Paragraph
-                    </div>
-
-
-                </div>*/}
             </div>
         </div>
     )
 }
 
+const stateToPropertiesMapper = (state) => ({
+    preview: state.preview
+});
+
 const dispatcherToPropsMapper = (dispatch) => ({
-    toggleEditing: (id, checked) => actions.toggleEditing(dispatch, id, checked),
+    enableEditing: (id) => actions.enableEditing(dispatch, id),
+    toggleEditing: (id) => actions.toggleEditing(dispatch, id),
     deleteWidget: (id) => actions.deleteWidget(dispatch, id),
     cloneWidget: (widget) => actions.cloneWidget(dispatch, widget),
     moveUp: (id) => actions.moveUp(dispatch, id),
     setWidgetType: (id, widgetType) => actions.setWidgetType(dispatch, id, widgetType)
 })
 
-const WidgetComponent = connect(null, dispatcherToPropsMapper)(Widget)
+const WidgetComponent = connect(stateToPropertiesMapper, dispatcherToPropsMapper)(Widget)
 export default WidgetComponent
 
 

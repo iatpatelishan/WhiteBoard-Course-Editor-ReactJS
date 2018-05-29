@@ -3,12 +3,7 @@ import WidgetService from '../services/WidgetService';
 import * as constants from "../constants";
 
 const widgets = (state = [], action) => {
-    let maxid = 0;
-    Object.keys(state).forEach(function (key) {
-        if (state[key].id > maxid) {
-            maxid = state[key].id
-        }
-    });
+    let maxid = new Date();
 
     switch (action.type) {
         case 'ADD_WIDGET':
@@ -36,13 +31,29 @@ const widgets = (state = [], action) => {
             })
             newState[index].widgetType = action.widgetType
             return newState;
-        case 'TOGGLE_EDITING':
+        case constants.TOGGLE_PREVIEW:
+            newState = JSON.parse(JSON.stringify(state))
+            return newState.map(widget => {
+                    widget.editing = action.preview
+                return Object.assign({}, widget)
+            })
+        case constants.ENABLE_EDITING:
+            newState = JSON.parse(JSON.stringify(state))
+            return newState.map(widget => {
+                if (widget.id === action.id) {
+                    widget.editing = true
+                } else {
+                    widget.editing = false
+                }
+                return Object.assign({}, widget)
+            })
+        case constants.TOGGLE_EDITING:
             newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(
                 function (widget) {
                     return widget.id === action.id
                 })
-            newState[index].editing = action.editing
+            newState[index].editing = !newState[index].editing
             console.log(newState)
             return newState
         case 'SET_TEXT_WIDGET':

@@ -9,12 +9,24 @@ export const addWidget = (dispatch) => (
     })
 );
 
+export const togglePreview = (dispatch,preview) => (
+    dispatch({
+        type: constants.TOGGLE_PREVIEW,
+        preview: preview
+    })
+);
+
+export const enableEditing = (dispatch, id, checked) => (
+    dispatch({
+        type: constants.ENABLE_EDITING,
+        id: id
+    })
+);
 
 export const toggleEditing = (dispatch, id, checked) => (
     dispatch({
         type: constants.TOGGLE_EDITING,
-        id: id,
-        editing: checked
+        id: id
     })
 );
 
