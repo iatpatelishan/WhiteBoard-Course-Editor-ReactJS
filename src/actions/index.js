@@ -86,3 +86,16 @@ export const paragraphTextChanged = (dispatch, widgetId, newText) => (
         id: widgetId,
         text: newText})
 )
+
+export const listItemsChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.LIST_ITEM_CHANGED,
+        id: widgetId,
+        listItems: newText})
+)
+export const listTypeChanged = (dispatch, widgetId, newType) => (
+    dispatch({
+        type: constants.LIST_TYPE_CHANGED,
+        id: widgetId,
+        listType: newType})
+)

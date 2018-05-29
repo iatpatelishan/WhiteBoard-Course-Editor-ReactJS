@@ -89,6 +89,20 @@ const widgets = (state = [], action) => {
                 }
                 return Object.assign({}, widget)
             })
+        case constants.LIST_ITEM_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.listItems = action.listItems
+                }
+                return Object.assign({}, widget)
+            })
+        case constants.LIST_TYPE_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.listType = action.listType
+                }
+                return Object.assign({}, widget)
+            })
         default:
             return state
     }
