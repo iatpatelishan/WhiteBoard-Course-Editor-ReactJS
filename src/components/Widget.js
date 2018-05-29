@@ -42,10 +42,10 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
 
                 <div className="row wbdv-display-block">
                     {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
-                    {widget.widgetType==='Image' && <Image/>}
-                    {widget.widgetType==='Link' && <Link/>}
-                    {widget.widgetType==='List' && <List/>}
-                    {widget.widgetType==='Paragraph' && <Paragraph/>}
+                    {widget.widgetType==='Image' && <Image widget={widget}/>}
+                    {widget.widgetType==='Link' && <Link widget={widget}/>}
+                    {widget.widgetType==='List' && <List widget={widget}/>}
+                    {widget.widgetType==='Paragraph' && <Paragraph widget={widget}/>}
                 </div>
 
 

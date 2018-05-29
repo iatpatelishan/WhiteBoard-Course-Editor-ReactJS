@@ -79,3 +79,10 @@ export const headingSizeChanged = (dispatch, widgetId, newSize) => (
         id: widgetId,
         size: newSize})
 )
+
+export const paragraphTextChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.PARAGRAPH_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
+)
