@@ -61,6 +61,13 @@ const widgets = (state = [], action) => {
             newState = Object.assign({}, state)
             newState = action.widgets
             return newState
+        case constants.WIDGET_NAME_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.name = action.name
+                }
+                return Object.assign({}, widget)
+            })
         case constants.HEADING_TEXT_CHANGED:
             return state.map(widget => {
                 if (widget.id === action.id) {
