@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux'
 import widgets from './widgets'
+import topicId from './topicId'
+
 
 
 const RootReducer = combineReducers({
-    widgets
+    widgets,
+    topicId
 });
 
 export default RootReducer;

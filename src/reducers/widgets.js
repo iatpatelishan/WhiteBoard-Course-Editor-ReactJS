@@ -1,4 +1,6 @@
+import * as constants from "../constants";
 import 'array.prototype.move';
+import WidgetService from '../services/WidgetService';
 
 const widgets = (state = [], action) => {
     switch (action.type) {
@@ -37,6 +39,13 @@ const widgets = (state = [], action) => {
                 function (widget) { return widget.id === action.id })
             newState[index].rawtext = action.text
             console.log(newState)
+            return newState
+        case constants.SAVE:
+            WidgetService.instance.saveWigets(action.topicId, state);
+            return state
+        case constants.FIND_ALL_WIDGETS:
+            newState = Object.assign({}, state)
+            newState = action.widgets
             return newState
         default:
             return state

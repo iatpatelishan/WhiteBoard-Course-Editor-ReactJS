@@ -5,37 +5,55 @@ import WidgetComponent from '../../components/Widget';
 import AddWidgetComponent from '../../components/AddWidget';
 
 
-const WidgetListComponent = ({widgets}) => (
-    <div className="wbdv-widget-editor">
-        <button type="button" className="btn btn-primary float-right wbdv-wdgt-save">
-            Preview
-        </button>
-        <button type="button" className="btn btn-success float-right wbdv-wdgt-save">
-            <i className="fa fa-save"></i>            Save
-        </button>
-        <div className="clearfix"></div>
+class WidgetListComponent extends Component {
 
-        {widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}
+    constructor(props){
+        super(props)
+        this.props.findAllWidgets(this.props.topicId)
+    }
 
-        <AddWidgetComponent />
-    </div>
-    );
+    componentWillReceiveProps(newProps) {
+        if(newProps.topicId != newProps.topicIdFromTopicEditor){
+            newProps.findAllWidgets(newProps.topicIdFromTopicEditor);
+        }
+    }
 
+    componentDidMount(){
 
-const stateToPropertiesMapper = state => ({
-    widgets: state.widgets
+    }
+
+    render() {
+        return (
+            <div className="wbdv-widget-editor">{this.props.topicId}
+                <button type="button" className="btn btn-primary float-right wbdv-wdgt-save">
+                    Preview
+                </button>
+                <button type="button" className="btn btn-success float-right wbdv-wdgt-save" onClick={() => this.props.save(this.props.topicId)}>
+                    <i className="fa fa-save"></i> Save
+                </button>
+                <div className="clearfix"></div>
+
+                {this.props.widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}
+
+                <AddWidgetComponent/>
+            </div>
+        )
+    };
+}
+
+const stateToPropertiesMapper = (state, ownProps) => ({
+    widgets: state.widgets,
+    topicId: state.topicId,
+    topicIdFromTopicEditor : ownProps.topicId
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-
+    findAllWidgets: (topicId) => actions.findAllWidgets(dispatch,topicId),
+    save: (topicId) => actions.save(dispatch,topicId)
 });
 
 const WidgetList = connect(stateToPropertiesMapper, dispatcherToPropsMapper)(WidgetListComponent);
 
-const App = () => (
-    <div>
-        <WidgetList/>
-    </div>
-);
 
-export default App
+
+export default WidgetList

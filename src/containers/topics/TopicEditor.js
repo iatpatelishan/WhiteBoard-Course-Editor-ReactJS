@@ -3,12 +3,14 @@ import WidgetApp from "../widget/WidgetApp";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import RootReducer from "../../reducers"
+import WidgetService from "../../services/WidgetService"
 
 
 export default class TopicEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {courseId: '', moduleId: '', lessonId:'', topicId: ''};
+        this.widgetService = WidgetService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setLessonId = this.setLessonId.bind(this);
@@ -20,6 +22,7 @@ export default class TopicEditor extends Component {
         this.setModuleId(this.props.match.params.moduleId);
         this.setLessonId(this.props.match.params.lessonId);
         this.setTopicId(this.props.match.params.topicId);
+
     }
 
     componentWillReceiveProps(newProps) {
@@ -52,7 +55,7 @@ export default class TopicEditor extends Component {
         let store = createStore(RootReducer);
         return(
             <Provider store={store}>
-                <WidgetApp />
+                <WidgetApp topicId={this.state.topicId} />
             </Provider>
         )
     }

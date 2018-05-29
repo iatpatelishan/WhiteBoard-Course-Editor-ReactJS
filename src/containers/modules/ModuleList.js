@@ -164,10 +164,10 @@ export default class ModuleList extends React.Component {
                 <div className="col-lg-3 wbdv-module-panel">
                     <div className="wbdv-top-bar">
                         <nav className="navbar navbar-dark navbar-dark-clr">
-                            <a className="navbar-brand">
+                            <span className="navbar-brand">
                                 <a className="text-white" href={`/courses`}><i className="fa fa-times wbdv-close-editor"></i></a>
                                 <span>{this.state.course.title}</span>
-                            </a>
+                            </span>
                         </nav>
                     </div>
                     <div className="container wbdv-margin-top-20">

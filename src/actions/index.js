@@ -1,7 +1,10 @@
+import * as constants from "../constants";
+import WidgetService from "../services/WidgetService";
+
 let nextWidgetId = 0;
 export const addWidget = (dispatch) => (
     dispatch({
-        type: 'ADD_WIDGET',
+        type: constants.ADD_WIDGET,
         id: nextWidgetId++
     })
 );
@@ -9,7 +12,7 @@ export const addWidget = (dispatch) => (
 
 export const toggleEditing = (dispatch, id, checked) => (
     dispatch({
-        type: 'TOGGLE_EDITING',
+        type: constants.TOGGLE_EDITING,
         id: id,
         editing: checked
     })
@@ -18,7 +21,7 @@ export const toggleEditing = (dispatch, id, checked) => (
 
 export const setWidgetType = (dispatch, id, widgetType) => (
     dispatch({
-        type: 'SET_WIDGET_TYPE',
+        type: constants.SET_WIDGET_TYPE,
         widgetType: widgetType, id: id
     })
 );
@@ -26,7 +29,7 @@ export const setWidgetType = (dispatch, id, widgetType) => (
 
 export const deleteWidget = (dispatch,id) => (
     dispatch({
-        type: 'DELETE_WIDGET', id: id
+        type: constants.DELETE_WIDGET, id: id
     })
 );
 
@@ -35,4 +38,18 @@ export const moveUp = (dispatch,widget) => (
     dispatch({
         type: 'MOVE_UP', widget: widget
     })
+);
+
+
+export const findAllWidgets = (dispatch, topicId) => {
+    WidgetService.instance.findAllWidgetsForTopic(topicId)
+        .then(widgets => dispatch({type: constants.FIND_ALL_WIDGETS, topicId: topicId, widgets: widgets}))
+}
+
+export const save = (dispatch,topicId) => {
+    return(dispatch({type: constants.SAVE, topicId: topicId}));
+};
+
+export const preview = dispatch => (
+    dispatch({type: constants.PREVIEW})
 );
