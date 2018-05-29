@@ -17,9 +17,6 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
         <div className="card wbdv-margin-top-10">
             <div className="card-body wbdv-margin-left-right-20">
                 <div className="row wbdv-display-block">
-                    <div className="float-left">
-                        <h2>{widget.widgetType} {widget.id}</h2>
-                    </div>
                     <div>
                         <span className="btn btn-danger wbdv-wdgt-btn float-right" onClick={e => deleteWidget(widget.id)}> <i className="fa fa-times"></i> </span>
 
@@ -40,6 +37,7 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
                         <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-up"></i> </span>
                         <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-down"></i> </span>
                     </div>
+                    <h3>{widget.widgetType} Widget</h3>
                 </div>
 
                 <div className="row wbdv-display-block">

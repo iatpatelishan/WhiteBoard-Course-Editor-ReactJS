@@ -7,18 +7,33 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
     let inputElem
     return(
         <div>
-            <div hidden={preview}>
-                <h2> Heading {widget.size}</h2>
-                <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
-                       value={widget.text}
-                       ref={node => inputElem = node}/>
-                <select onChange={() => headingSizeChanged(widget.id, selectElem.value)}
-                        value={widget.size}
-                        ref={node => selectElem = node}>
-                    <option value="1">Heading 1</option>
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
-                </select>
+            <div hidden={preview} className="wbdv-single-widget-edit">
+
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Heading Text</label>
+                    <div className="col-sm-10">
+                        <input className="form-control" onChange={() => headingTextChanged(widget.id, inputElem.value)}
+                               value={widget.text}
+                               ref={node => inputElem = node}
+                                placeholder="Add Heading Text Here"/>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Text Size</label>
+                    <div className="col-sm-10">
+                        <select className="form-control" onChange={() => headingSizeChanged(widget.id, selectElem.value)}
+                                value={widget.size}
+                                ref={node => selectElem = node}>
+                            <option value="1">Heading 1</option>
+                            <option value="2">Heading 2</option>
+                            <option value="3">Heading 3</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <hr/>
                 <h3>Preview</h3>
             </div>
             {widget.size == 1 && <h1>{widget.text}</h1>}
@@ -28,8 +43,10 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged}) => {
     )
 }
 const dispathToPropsMapper = dispatch => ({
-
+    headingTextChanged: (widgetId, newText) => actions.headingTextChanged(dispatch, widgetId, newText),
+    headingSizeChanged: (widgetId, newSize) => actions.headingSizeChanged(dispatch, widgetId, newSize)
 })
+
 const stateToPropsMapper = state => ({
 
 })

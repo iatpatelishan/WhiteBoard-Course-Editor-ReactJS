@@ -3,10 +3,10 @@ import WidgetService from '../services/WidgetService';
 import * as constants from "../constants";
 
 const widgets = (state = [], action) => {
-    let maxid=0;
-    Object.keys(state).forEach(function(key) {
-        if(state[key].id > maxid){
-            maxid=state[key].id
+    let maxid = 0;
+    Object.keys(state).forEach(function (key) {
+        if (state[key].id > maxid) {
+            maxid = state[key].id
         }
     });
 
@@ -23,7 +23,7 @@ const widgets = (state = [], action) => {
             return state.filter(widget => widget.id != action.id)
         case constants.CLONE_WIDGET:
             let widget = JSON.parse(JSON.stringify(action.widget));
-            widget.id = maxid+1;
+            widget.id = maxid + 1;
             return [...state, widget];
         case 'MOVE_UP':
             let index = state.indexOf(action.widget);
@@ -32,7 +32,8 @@ const widgets = (state = [], action) => {
         case 'SET_WIDGET_TYPE':
             let newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(function (widget) {
-                return widget.id === action.id})
+                return widget.id === action.id
+            })
             newState[index].widgetType = action.widgetType
             return newState;
         case 'TOGGLE_EDITING':
@@ -47,7 +48,9 @@ const widgets = (state = [], action) => {
         case 'SET_TEXT_WIDGET':
             newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(
-                function (widget) { return widget.id === action.id })
+                function (widget) {
+                    return widget.id === action.id
+                })
             newState[index].rawtext = action.text
             console.log(newState)
             return newState
@@ -58,6 +61,20 @@ const widgets = (state = [], action) => {
             newState = Object.assign({}, state)
             newState = action.widgets
             return newState
+        case constants.HEADING_TEXT_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.text = action.text
+                }
+                return Object.assign({}, widget)
+            })
+        case constants.HEADING_SIZE_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.size = action.size
+                }
+                return Object.assign({}, widget)
+            })
         default:
             return state
     }
