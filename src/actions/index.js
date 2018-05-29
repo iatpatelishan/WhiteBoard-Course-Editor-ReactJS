@@ -99,3 +99,24 @@ export const listTypeChanged = (dispatch, widgetId, newType) => (
         id: widgetId,
         listType: newType})
 )
+
+export const imageUrlChanged = (dispatch, widgetId, newUrl) => (
+    dispatch({
+        type: constants.IMAGE_URL_CHANGED,
+        id: widgetId,
+        src: newUrl})
+)
+
+export const linkTextChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.LINK_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
+)
+
+export const linkUrlChanged = (dispatch, widgetId, newUrl) => (
+    dispatch({
+        type: constants.LINK_URL_CHANGED,
+        id: widgetId,
+        href: newUrl})
+)

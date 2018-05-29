@@ -103,6 +103,27 @@ const widgets = (state = [], action) => {
                 }
                 return Object.assign({}, widget)
             })
+        case constants.IMAGE_URL_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.src = action.src
+                }
+                return Object.assign({}, widget)
+            })
+        case constants.LINK_TEXT_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.text = action.text
+                }
+                return Object.assign({}, widget)
+            })
+        case constants.LINK_URL_CHANGED:
+            return state.map(widget => {
+                if (widget.id === action.id) {
+                    widget.href = action.href
+                }
+                return Object.assign({}, widget)
+            })
         default:
             return state
     }
