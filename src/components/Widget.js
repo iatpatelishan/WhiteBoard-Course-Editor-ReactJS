@@ -1,6 +1,14 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import * as actions from "../actions"
+import HeadingContainer from "./widget/Heading"
+import Image from "./widget/Image"
+import Link from "./widget/Link"
+import List from "./widget/List"
+import Paragraph from "./widget/Paragraph"
+
+
+
 
 export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType, toggleEditing}) => {
     let select;
@@ -23,10 +31,10 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
                                  value={widget.widgetType}
                                  onChange={e => setWidgetType(widget.id, select.value)}>
                             <option>Heading</option>
-                            <option>Paragraph</option>
-                            <option>HTML</option>
+                            <option>Image</option>
                             <option>Link</option>
-                            <option>iFrame</option>
+                            <option>List</option>
+                            <option>Paragraph</option>
                         </select>
 
                         <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-up"></i> </span>
@@ -35,7 +43,11 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
                 </div>
 
                 <div className="row wbdv-display-block">
-
+                    {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
+                    {widget.widgetType==='Image' && <Image/>}
+                    {widget.widgetType==='Link' && <Link/>}
+                    {widget.widgetType==='List' && <List/>}
+                    {widget.widgetType==='Paragraph' && <Paragraph/>}
                 </div>
 
 
