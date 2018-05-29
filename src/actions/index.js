@@ -1,11 +1,10 @@
 import * as constants from "../constants";
 import WidgetService from "../services/WidgetService";
 
-let nextWidgetId = 0;
-export const addWidget = (dispatch) => (
+export const addWidget = (dispatch, lastWidgetType) => (
     dispatch({
         type: constants.ADD_WIDGET,
-        id: nextWidgetId++
+        lastWidgetType: lastWidgetType
     })
 );
 

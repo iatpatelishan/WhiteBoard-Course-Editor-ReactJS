@@ -33,7 +33,7 @@ class WidgetListComponent extends Component {
         return (
             <div className="wbdv-widget-editor wbdv-overflow-hidden">
 
-                <label className="float-right switch wbdv-wdgt-save" onClick={() => this.props.togglePreview(previewElem.checked)}>
+                <label title="Preview Mode" className="float-right switch wbdv-wdgt-save" onClick={() => this.props.togglePreview(previewElem.checked)}>
                     <input type="checkbox" checked={this.props.preview} ref={node => previewElem = node} />
                         <span className="slider round"></span>
                 </label>
@@ -44,7 +44,7 @@ class WidgetListComponent extends Component {
 
                 {this.props.widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}
 
-                <AddWidgetComponent/>
+                <AddWidgetComponent />
             </div>
         )
     };

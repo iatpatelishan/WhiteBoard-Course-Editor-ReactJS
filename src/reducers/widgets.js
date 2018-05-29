@@ -16,8 +16,9 @@ const widgets = (state = [], action) => {
                 {
                     id: maxid + 1,
                     text: 'New Widget',
-                    widgetType: 'Heading',
-                    size: '1'
+                    widgetType: action.lastWidgetType,
+                    size: '1',
+                    editing: true
                 }]
         case constants.DELETE_WIDGET:
             return state.filter(widget => widget.id != action.id)
@@ -29,7 +30,7 @@ const widgets = (state = [], action) => {
             let index = state.indexOf(action.widget);
             state.move(index, index - 1);
             return state.splice(0);
-        case 'SET_WIDGET_TYPE':
+        case constants.SET_WIDGET_TYPE:
             let newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(function (widget) {
                 return widget.id === action.id
