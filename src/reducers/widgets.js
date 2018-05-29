@@ -71,6 +71,9 @@ const widgets = (state = [], action) => {
             newState[index].rawtext = action.text
             console.log(newState)
             return newState
+        case constants.SAVE_WIDGETS:
+            newState = JSON.parse(JSON.stringify(action.widgets))
+            return newState;
         case constants.SAVE:
             WidgetService.instance.saveWigets(action.topicId, state);
             return state

@@ -63,6 +63,10 @@ export const findAllWidgets = (dispatch, topicId) => {
         .then(widgets => dispatch({type: constants.FIND_ALL_WIDGETS, topicId: topicId, widgets: widgets}))
 }
 
+export const saveWidgets = (dispatch,widgets) => {
+    return(dispatch({type: constants.SAVE_WIDGETS, widgets: widgets}));
+};
+
 export const save = (dispatch,topicId) => {
     return(dispatch({type: constants.SAVE, topicId: topicId}));
 };

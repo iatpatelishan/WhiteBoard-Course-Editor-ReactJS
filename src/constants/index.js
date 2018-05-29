@@ -1,4 +1,5 @@
 export const SAVE = 'SAVE'
+export const SAVE_WIDGETS = 'SAVE_WIDGETS'
 export const FIND_ALL_WIDGETS = 'FIND_ALL_WIDGETS'
 export const DELETE_WIDGET = 'DELETE_WIDGET'
 export const CLONE_WIDGET = 'CLONE_WIDGET'
