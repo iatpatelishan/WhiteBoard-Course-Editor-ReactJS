@@ -3,7 +3,12 @@ import WidgetService from '../services/WidgetService';
 import * as constants from "../constants";
 
 const widgets = (state = [], action) => {
-    let maxid = new Date();
+    let maxid = 0;
+    Object.keys(state).forEach(function (key) {
+        if (state[key].id > maxid) {
+            maxid = state[key].id
+        }
+    });
 
     switch (action.type) {
         case 'ADD_WIDGET':

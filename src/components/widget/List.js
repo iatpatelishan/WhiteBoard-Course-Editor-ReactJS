@@ -31,7 +31,7 @@ const List = ({widget, preview, widgetNameChanged, listItemsChanged, listTypeCha
                     <div className="col-sm-10">
                         <textarea className="form-control" onChange={() => listItemsChanged(widget.id, listItemsElem.value)}
                                ref={node => listItemsElem = node}
-                                  placeholder="Add List Items Here. One item per line." value={widget.listItems} />
+                                  placeholder="Add List Items Here. One item per line." value={widget.listItems} rows="5" />
                     </div>
                 </div>
 

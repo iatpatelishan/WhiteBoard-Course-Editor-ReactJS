@@ -22,10 +22,10 @@ const Paragraph = ({widget, preview, widgetNameChanged, paragraphTextChanged}) =
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Paragraph Text</label>
                     <div className="col-sm-10">
-                        <input className="form-control" onChange={() => paragraphTextChanged(widget.id, paragraphTextElem.value)}
+                        <textarea className="form-control" onChange={() => paragraphTextChanged(widget.id, paragraphTextElem.value)}
                                value={widget.text}
                                ref={node => paragraphTextElem = node}
-                               placeholder="Add Paragraph Text Here"/>
+                               placeholder="Add Paragraph Text Here" rows="4" />
                     </div>
                 </div>
 
