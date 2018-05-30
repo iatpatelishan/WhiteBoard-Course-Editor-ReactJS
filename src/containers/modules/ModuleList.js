@@ -52,7 +52,6 @@ export default class ModuleList extends React.Component {
     }
 
     findAllModulesForCourse(courseId) {
-        console.log("Finding all modules");
         this.moduleService
             .findAllModulesForCourse(courseId)
             .then((modules) => {
@@ -61,7 +60,6 @@ export default class ModuleList extends React.Component {
     }
 
     setModules(modules) {
-        console.log("Setting Modules");
         this.setState({modules: modules})
     }
 

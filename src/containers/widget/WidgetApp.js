@@ -82,7 +82,7 @@ class WidgetListComponent extends Component {
         return (
             <div className="wbdv-widget-editor wbdv-overflow-hidden">
                 <label title="Preview Mode" className="float-right switch wbdv-wdgt-save" onClick={() => this.props.togglePreview(previewElem.checked)}>
-                    <input type="checkbox" checked={this.props.preview} ref={node => previewElem = node} />
+                    <input onChange={() => {}} type="checkbox" checked={this.props.preview} ref={node => previewElem = node} />
                         <span className="slider round"></span>
                 </label>
                 <button type="button" className="btn btn-success float-right wbdv-wdgt-save" onClick={() => this.props.save(this.props.topicId)}>
@@ -109,7 +109,7 @@ class WidgetListComponent extends Component {
                                                     provided.draggableProps.style
                                                 )}
                                             >
-                                                <WidgetComponent key={item.id} widget={item}/>
+                                                <WidgetComponent widgetIndex={index} key={item.id} widget={item}/>
                                             </div>
                                         )}
                                     </Draggable>

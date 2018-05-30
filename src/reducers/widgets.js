@@ -31,6 +31,10 @@ const widgets = (state = [], action) => {
             let index = state.indexOf(action.widget);
             state.move(index, index - 1);
             return state.splice(0);
+        case 'MOVE_DOWN':
+            index = state.indexOf(action.widget);
+            state.move(index, index + 1);
+            return state.splice(0);
         case constants.SET_WIDGET_TYPE:
             let newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(function (widget) {
@@ -61,7 +65,6 @@ const widgets = (state = [], action) => {
                     return widget.id === action.id
                 })
             newState[index].editing = !newState[index].editing
-            console.log(newState)
             return newState
         case 'SET_TEXT_WIDGET':
             newState = JSON.parse(JSON.stringify(state))
@@ -70,7 +73,6 @@ const widgets = (state = [], action) => {
                     return widget.id === action.id
                 })
             newState[index].rawtext = action.text
-            console.log(newState)
             return newState
         case constants.SAVE_WIDGETS:
             newState = JSON.parse(JSON.stringify(action.widgets))

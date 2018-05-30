@@ -57,6 +57,12 @@ export const moveUp = (dispatch,widget) => (
     })
 );
 
+export const moveDown = (dispatch,widget) => (
+    dispatch({
+        type: 'MOVE_DOWN', widget: widget
+    })
+);
+
 
 export const findAllWidgets = (dispatch, topicId) => {
     WidgetService.instance.findAllWidgetsForTopic(topicId)

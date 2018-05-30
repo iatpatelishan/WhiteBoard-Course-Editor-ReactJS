@@ -19,7 +19,7 @@ export default class ModuleListItem extends React.Component {
                 <div className="col-1 wbdv-module-close">
                     <i onClick={() => {
                         this.props.deleteModule(this.props.module.id)
-                    }} className="fa fa-times-circle-o "></i>
+                    }} className="fa fa-times "></i>
                 </div>
                 </div>
 

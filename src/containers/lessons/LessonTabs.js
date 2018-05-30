@@ -22,13 +22,11 @@ export default class LessonTabs extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount-->");
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("componentWillReceiveProps");
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
         this.findAllLessonsForModule(newProps.moduleId);
@@ -43,17 +41,14 @@ export default class LessonTabs extends React.Component {
     }
 
     findAllLessonsForModule(moduleId) {
-        console.log("Finding all lessons");
         this.lessonService
             .findAllLessonsForModule(moduleId)
             .then((lessons) => {
-                console.log("Setting lessons");
                 this.setLessons(lessons);
             });
     }
 
     setLessons(lessons) {
-        console.log("Setting Lessons");
         this.setState({lessons: lessons});
     }
 
@@ -142,7 +137,6 @@ export default class LessonTabs extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-dark-clr">

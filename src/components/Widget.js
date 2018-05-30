@@ -10,9 +10,18 @@ import Paragraph from "./widget/Paragraph"
 
 
 
-export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType, enableEditing, toggleEditing, preview}) => {
+export const Widget = ({widgetIndex, widget, maxWidgetIndex, moveUp, moveDown,deleteWidget, cloneWidget, setWidgetType, enableEditing, toggleEditing, preview}) => {
     let select;
     let editing;
+    let upbutton=true;
+    let downbutton=true;
+    if(widgetIndex == '0'){
+        upbutton=false;
+    }
+    if(widgetIndex == maxWidgetIndex){
+        downbutton=false;
+    }
+
     return (
         <div className="card wbdv-margin-top-10">
             <div className="card-body wbdv-margin-left-right-20" onClick={e => {if(preview){enableEditing(widget.id)}}}>
@@ -34,8 +43,9 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
                             <option>Paragraph</option>
                         </select>
 
-                        <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-up"></i> </span>
-                        <span className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-down"></i> </span>
+                        <span style={{display: downbutton ? 'block' : 'none'}} className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveDown(widget))}> <i className="fa fa-chevron-down"></i> </span>
+                        <span style={{display: upbutton ? 'block' : 'none'}} className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveUp(widget))}> <i className="fa fa-chevron-up"></i> </span>
+
                         <h3>{widget.widgetType} Widget</h3>
                     </div>
 
@@ -60,7 +70,8 @@ export const Widget = ({widget, moveUp, deleteWidget, cloneWidget, setWidgetType
 }
 
 const stateToPropertiesMapper = (state) => ({
-    preview: state.preview
+    preview: state.preview,
+    maxWidgetIndex: (state.widgets.length-1)
 });
 
 const dispatcherToPropsMapper = (dispatch) => ({
@@ -69,6 +80,7 @@ const dispatcherToPropsMapper = (dispatch) => ({
     deleteWidget: (id) => actions.deleteWidget(dispatch, id),
     cloneWidget: (widget) => actions.cloneWidget(dispatch, widget),
     moveUp: (id) => actions.moveUp(dispatch, id),
+    moveDown: (id) => actions.moveDown(dispatch, id),
     setWidgetType: (id, widgetType) => actions.setWidgetType(dispatch, id, widgetType)
 })
 

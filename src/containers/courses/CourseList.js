@@ -20,16 +20,13 @@ class CourseList extends Component {
     }
 
     updateCourseList() {
-        console.log("Finding courses");
         return this.courseService.findAllCourses()
             .then((courses) => {
-                console.log("Updating State after find courses");
                 return this.setState({courses: courses});
             });
     }
 
     deleteCourseById(id){
-        console.log("Deleting courses");
         return this.courseService.deleteCourseById(id)
             .then(() => this.updateCourseList());
     }

@@ -23,14 +23,12 @@ export default class TopicTabs extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount-->");
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
         this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
-        console.log("componentWillReceiveProps");
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
         this.setLessonId(newProps.lessonId);
@@ -50,17 +48,14 @@ export default class TopicTabs extends React.Component {
     }
 
     findAllTopicsForLesson(lessonId) {
-        console.log("Finding all topics");
         this.topicService
             .findAllTopicsForLesson(lessonId)
             .then((topics) => {
-                console.log("Setting topics");
                 this.setTopics(topics);
             });
     }
 
     setTopics(topics) {
-        console.log("Setting Topics");
         this.setState({topics: topics});
     }
 
