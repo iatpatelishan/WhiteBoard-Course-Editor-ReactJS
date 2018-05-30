@@ -41,6 +41,10 @@ const widgets = (state = [], action) => {
                 return widget.id === action.id
             })
             newState[index].widgetType = action.widgetType
+            if(action.widgetType=='List'){
+                newState[index].listItems='';
+                newState[index].listType='UNORDERED';
+            }
             return newState;
         case constants.TOGGLE_PREVIEW:
             newState = JSON.parse(JSON.stringify(state))

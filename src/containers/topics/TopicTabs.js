@@ -148,7 +148,6 @@ export default class TopicTabs extends React.Component {
     render() {
         return (
                 <div className="container-topic">
-                    <h3>Topic Editor</h3>
                     <nav className="navbar navbar-expand-lg navbar-light wbdb-topic-navbar">
                         <div className="" id="navbarColor01">
                             <ul className="navbar-nav mr-auto">
