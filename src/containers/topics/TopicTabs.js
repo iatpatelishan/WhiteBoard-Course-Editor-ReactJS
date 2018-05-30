@@ -157,7 +157,7 @@ export default class TopicTabs extends React.Component {
                         <ul className="nav navbar-nav navbar-right ml-auto">
                             <li className="nav-item"><i onClick={() => {
                                 this.showaddTopic()
-                            }} className="fa fa-2x fa-plus"></i></li>
+                            }} className="fa fa-2x fa-plus wbdv-add-lesson-icon"></i></li>
                         </ul>
                     </nav>
                     <div>

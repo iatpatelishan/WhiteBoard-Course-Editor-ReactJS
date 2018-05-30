@@ -146,7 +146,9 @@ export default class LessonTabs extends React.Component {
                         </ul>
                     </div>
                     <ul className="nav navbar-nav navbar-right ml-auto">
-                        <li className="nav-item"><i onClick={() => {this.showaddLesson()}} className="fa fa-2x fa-plus text-white"></i></li>
+                        <li className="nav-item">
+                            <i onClick={() => {this.showaddLesson()}} className="fa fa-2x fa-plus text-white wbdv-add-lesson-icon"></i>
+                        </li>
                     </ul>
                 </nav>
                 <div>

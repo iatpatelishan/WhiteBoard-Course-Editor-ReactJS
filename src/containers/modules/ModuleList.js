@@ -174,7 +174,7 @@ export default class ModuleList extends React.Component {
                     </div>
                 </div>
                 <div className="col-lg-9 wbdv-lesson-panel">
-                    <Route path="/course/:courseId/module/:moduleId" component={ModuleEditor}/>
+                    <Route path="/course/:courseId/module/:moduleId" render={(props) => <ModuleEditor {...props} setActive={this.setActive} />} />
                 </div>
             </div>
             </Router>

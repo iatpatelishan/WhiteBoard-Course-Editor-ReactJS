@@ -153,6 +153,14 @@ ul li {
     border-radius: 0px !important;
 }
 
+.wbdv-image-preview{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.wbdv-add-lesson-icon{
+    margin-top: 5px !important;
+}
 
 
 

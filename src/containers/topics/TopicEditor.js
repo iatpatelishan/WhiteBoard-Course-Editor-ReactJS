@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import WidgetApp from "../widget/WidgetApp";
-import {createStore} from "redux";
 import {Provider} from "react-redux";
-import RootReducer from "../../reducers"
+import store from "../../store/courseEditor"
 import WidgetService from "../../services/WidgetService"
 
 
@@ -52,7 +51,6 @@ export default class TopicEditor extends Component {
 
 
     render(){
-        let store = createStore(RootReducer);
         return(
             <Provider store={store}>
                 <WidgetApp topicId={this.state.topicId} />
