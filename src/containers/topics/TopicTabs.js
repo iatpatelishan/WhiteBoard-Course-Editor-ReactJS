@@ -152,7 +152,6 @@ export default class TopicTabs extends React.Component {
 
     render() {
         return (
-            <Router>
                 <div className="container-topic">
                     <h3>Topic Editor</h3>
                     <nav className="navbar navbar-expand-lg navbar-light wbdb-topic-navbar">
@@ -171,7 +170,6 @@ export default class TopicTabs extends React.Component {
                         <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId" component={TopicEditor}/>
                     </div>
                 </div>
-            </Router>
         )
     }
 }

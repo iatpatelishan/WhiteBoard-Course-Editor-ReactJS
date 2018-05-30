@@ -144,7 +144,6 @@ export default class LessonTabs extends React.Component {
     render() {
         console.log(this.state);
         return (
-            <Router>
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-dark-clr">
                     <div className="" id="navbarColor01">
@@ -160,7 +159,6 @@ export default class LessonTabs extends React.Component {
                     <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId" component={LessonEditor}/>
                 </div>
             </div>
-            </Router>
         )
     }
 }

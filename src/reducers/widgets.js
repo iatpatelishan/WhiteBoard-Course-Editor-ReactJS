@@ -1,6 +1,7 @@
 import 'array.prototype.move';
 import WidgetService from '../services/WidgetService';
 import * as constants from "../constants";
+import swal from "sweetalert"
 
 const widgets = (state = [], action) => {
     let maxid = 0;
@@ -82,12 +83,27 @@ const widgets = (state = [], action) => {
             newState = action.widgets
             return newState
         case constants.WIDGET_NAME_CHANGED:
-            return state.map(widget => {
-                if (widget.id === action.id) {
-                    widget.name = action.name
+            let conflict=false
+            state.map(widget => {
+                if (widget.id != action.id && widget.name == action.name) {
+                    conflict=true
                 }
-                return Object.assign({}, widget)
             })
+            if(conflict){
+                swal({
+                    title: "Error!",
+                    text: "Please enter unique Widget name!",
+                    icon: "error",
+                });
+                return state
+            } else {
+                return state.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.name = action.name
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
         case constants.HEADING_TEXT_CHANGED:
             return state.map(widget => {
                 if (widget.id === action.id) {
