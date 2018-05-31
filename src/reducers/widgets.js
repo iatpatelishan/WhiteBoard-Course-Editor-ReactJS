@@ -12,7 +12,7 @@ const widgets = (state = [], action) => {
     });
 
     switch (action.type) {
-        case 'ADD_WIDGET':
+        case constants.ADD_WIDGET:
             return [...state,
                 {
                     id: maxid + 1,
@@ -27,11 +27,11 @@ const widgets = (state = [], action) => {
             let widget = JSON.parse(JSON.stringify(action.widget));
             widget.id = maxid + 1;
             return [...state, widget];
-        case 'MOVE_UP':
+        case constants.MOVE_UP:
             let index = state.indexOf(action.widget);
             state.move(index, index - 1);
             return state.splice(0);
-        case 'MOVE_DOWN':
+        case constants.MOVE_DOWN:
             index = state.indexOf(action.widget);
             state.move(index, index + 1);
             return state.splice(0);
@@ -41,15 +41,15 @@ const widgets = (state = [], action) => {
                 return widget.id === action.id
             })
             newState[index].widgetType = action.widgetType
-            if(action.widgetType=='List'){
-                newState[index].listItems='';
-                newState[index].listType='UNORDERED';
+            if (action.widgetType == 'List') {
+                newState[index].listItems = '';
+                newState[index].listType = 'UNORDERED';
             }
             return newState;
         case constants.TOGGLE_PREVIEW:
             newState = JSON.parse(JSON.stringify(state))
             return newState.map(widget => {
-                    widget.editing = action.preview
+                widget.editing = action.preview
                 return Object.assign({}, widget)
             })
         case constants.ENABLE_EDITING:
@@ -70,7 +70,7 @@ const widgets = (state = [], action) => {
                 })
             newState[index].editing = !newState[index].editing
             return newState
-        case 'SET_TEXT_WIDGET':
+        case constants.SET_TEXT_WIDGET:
             newState = JSON.parse(JSON.stringify(state))
             index = newState.findIndex(
                 function (widget) {
@@ -89,13 +89,13 @@ const widgets = (state = [], action) => {
             newState = action.widgets
             return newState
         case constants.WIDGET_NAME_CHANGED:
-            let conflict=false
+            let conflict = false
             state.map(widget => {
                 if (widget.id != action.id && widget.name == action.name) {
-                    conflict=true
+                    conflict = true
                 }
             })
-            if(conflict){
+            if (conflict) {
                 swal({
                     title: "Error!",
                     text: "Please enter unique Widget name!",

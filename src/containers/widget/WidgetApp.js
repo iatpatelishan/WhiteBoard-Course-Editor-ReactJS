@@ -5,7 +5,7 @@ import WidgetComponent from '../../components/Widget';
 import AddWidgetComponent from '../../components/AddWidget';
 import swal from "sweetalert";
 import ReactDOM from 'react-dom';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 
 // a little function to help us with reordering the result
@@ -37,10 +37,9 @@ const getListStyle = isDraggingOver => ({
 });
 
 
-
 class WidgetListComponent extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.onDragEnd = this.onDragEnd.bind(this);
         this.props.findAllWidgets(this.props.topicId)
@@ -62,8 +61,8 @@ class WidgetListComponent extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(newProps.topicId != newProps.topicIdFromTopicEditor){
-            document.addEventListener("keydown", function(e) {
+        if (newProps.topicId != newProps.topicIdFromTopicEditor) {
+            document.addEventListener("keydown", function (e) {
                 if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
                     e.preventDefault();
                     newProps.save(newProps.topicIdFromTopicEditor);
@@ -73,7 +72,7 @@ class WidgetListComponent extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
     }
 
@@ -81,11 +80,14 @@ class WidgetListComponent extends Component {
         let previewElem;
         return (
             <div className="wbdv-widget-editor wbdv-overflow-hidden">
-                <label title="Preview Mode" className="float-right switch wbdv-wdgt-save" onClick={() => this.props.togglePreview(previewElem.checked)}>
-                    <input onChange={() => {}} type="checkbox" checked={this.props.preview} ref={node => previewElem = node} />
-                        <span className="slider round"></span>
+                <label title="Preview Mode" className="float-right switch wbdv-wdgt-save"
+                       onClick={() => this.props.togglePreview(previewElem.checked)}>
+                    <input onChange={() => {
+                    }} type="checkbox" checked={this.props.preview} ref={node => previewElem = node}/>
+                    <span className="slider round"></span>
                 </label>
-                <button type="button" className="btn btn-success float-right wbdv-wdgt-save" onClick={() => this.props.save(this.props.topicId)}>
+                <button type="button" className="btn btn-success float-right wbdv-wdgt-save"
+                        onClick={() => this.props.save(this.props.topicId)}>
                     <i className="fa fa-save"></i> Save (Ctrl+S)
                 </button>
                 <div className="clearfix"></div>
@@ -122,7 +124,7 @@ class WidgetListComponent extends Component {
 
                 {/*{this.props.widgets.map(widget => <WidgetComponent key={widget.id} widget={widget}/>)}*/}
 
-                <AddWidgetComponent />
+                <AddWidgetComponent/>
             </div>
         )
     };
@@ -132,25 +134,26 @@ const stateToPropertiesMapper = (state, ownProps) => ({
     widgets: state.widgets,
     topicId: state.topicId,
     preview: state.preview,
-    topicIdFromTopicEditor : ownProps.topicId
+    topicIdFromTopicEditor: ownProps.topicId
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    saveWidgets: (widgets) => actions.saveWidgets(dispatch,widgets),
-    findAllWidgets: (topicId) => actions.findAllWidgets(dispatch,topicId),
+    saveWidgets: (widgets) => actions.saveWidgets(dispatch, widgets),
+    findAllWidgets: (topicId) => actions.findAllWidgets(dispatch, topicId),
     togglePreview: (preview) => actions.togglePreview(dispatch, preview),
     save: (topicId) => {
         swal({
-           title:"Saved!",
-            text:"Changes have been saved",
-            type:"success",
+            title: "Saved!",
+            text: "Changes have been saved",
+            type: "success",
             buttons: false,
-            timer: 1000});
-        return actions.save(dispatch,topicId)}
+            timer: 1000
+        });
+        return actions.save(dispatch, topicId)
+    }
 });
 
 const WidgetList = connect(stateToPropertiesMapper, dispatcherToPropsMapper)(WidgetListComponent);
-
 
 
 export default WidgetList

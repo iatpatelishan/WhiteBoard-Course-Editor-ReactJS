@@ -53,13 +53,13 @@ export const cloneWidget = (dispatch,widget) => (
 
 export const moveUp = (dispatch,widget) => (
     dispatch({
-        type: 'MOVE_UP', widget: widget
+        type: constants.MOVE_UP, widget: widget
     })
 );
 
 export const moveDown = (dispatch,widget) => (
     dispatch({
-        type: 'MOVE_DOWN', widget: widget
+        type: constants.MOVE_DOWN, widget: widget
     })
 );
 
