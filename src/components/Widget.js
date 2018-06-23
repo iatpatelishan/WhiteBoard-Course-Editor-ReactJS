@@ -6,6 +6,7 @@ import Image from "./widget/Image"
 import Link from "./widget/Link"
 import List from "./widget/List"
 import Paragraph from "./widget/Paragraph"
+import FormContainer from "../containers/widget/FormWidget";
 
 
 
@@ -41,6 +42,7 @@ export const Widget = ({widgetIndex, widget, maxWidgetIndex, moveUp, moveDown,de
                             <option>Link</option>
                             <option>List</option>
                             <option>Paragraph</option>
+                            <option>Form</option>
                         </select>
 
                         <span style={{display: downbutton ? 'block' : 'none'}} className="btn btn-warning wbdv-wdgt-btn float-right" onClick={() => (moveDown(widget))}> <i className="fa fa-chevron-down"></i> </span>
@@ -59,6 +61,7 @@ export const Widget = ({widgetIndex, widget, maxWidgetIndex, moveUp, moveDown,de
                     {widget.widgetType==='Link' && <Link widget={widget}/>}
                     {widget.widgetType==='List' && <List widget={widget}/>}
                     {widget.widgetType==='Paragraph' && <Paragraph widget={widget}/>}
+                    {widget.widgetType==='Form' && <FormContainer widget={widget}/>}
                 </div>
 
 

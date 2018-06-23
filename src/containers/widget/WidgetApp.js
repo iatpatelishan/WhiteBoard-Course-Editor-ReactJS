@@ -4,7 +4,6 @@ import * as actions from "../../actions"
 import WidgetComponent from '../../components/Widget';
 import AddWidgetComponent from '../../components/AddWidget';
 import swal from "sweetalert";
-import ReactDOM from 'react-dom';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 
@@ -61,9 +60,9 @@ class WidgetListComponent extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.topicId != newProps.topicIdFromTopicEditor) {
+        if (newProps.topicId !== newProps.topicIdFromTopicEditor) {
             document.addEventListener("keydown", function (e) {
-                if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                if (e.keyCode === 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
                     e.preventDefault();
                     newProps.save(newProps.topicIdFromTopicEditor);
                 }
