@@ -2,7 +2,7 @@ import 'array.prototype.move';
 import WidgetService from '../services/WidgetService';
 import * as constants from "../constants";
 import swal from "sweetalert"
-import elements from "./helperReducer/elements"
+import elements from "./helperReducer/formElements"
 
 const widgets = (state = [], action) => {
     let maxid = 0;
@@ -167,14 +167,10 @@ const widgets = (state = [], action) => {
                 }
                 return Object.assign({}, widget)
             })
-        case constants.ADD_FORM_INPUT:
-        case constants.ADD_FORM_CHECK:
-        case constants.ADD_FORM_RADIO:
-        case constants.ADD_FORM_SELECT:
-        case constants.ADD_FORM_TEXTAREA:
+        case constants.FORM_ADD_ELEMENT:
             return state.map(widget => {
                 if (widget.id === action.id) {
-                    widget.elements = elements(state,action)
+                    widget.elements = elements(widget.elements,action)
                 }
                 return Object.assign({}, widget)
             })

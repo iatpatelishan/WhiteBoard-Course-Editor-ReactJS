@@ -1,6 +1,8 @@
 import {connect} from "react-redux";
 import React, {Component} from "react";
 import * as actions from "../../actions/index"
+import InputFormElementContainer from "../../components/widget/form/InputFormElement";
+import CheckboxFormElementContainer from "../../components/widget/form/CheckboxFormElement";
 
 const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
     let widgetNameElem;
@@ -32,10 +34,30 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                         </select>
                     </div>
                     <div className="col-sm-2">
-                        <button className="btn btn-primary" onClick={() => addFormElement(widget.id, addElementElem)}><i
-                            className="fa fa-wpforms"></i> Add Element
+                        <button className="btn btn-primary"
+                                onClick={() => addFormElement(widget.id, addElementElem.value)}>
+                            <i className="fa fa-wpforms"></i>
+                            Add Element
                         </button>
                     </div>
+                </div>
+
+                <div>
+                    {widget.elements.map((element, index) => {
+                        if (element.elementType === 'INPUT') {
+                            return <InputFormElementContainer element={element}/>;
+                        } else if (element.elementType === 'CHECKBOX') {
+                            return <CheckboxFormElementContainer element={element}/>;
+                        } else if (element.elementType === 'RADIO') {
+                            return <InputFormElementContainer element={element}/>;
+                        } else if (element.elementType === 'SELECT') {
+                            return <InputFormElementContainer element={element}/>;
+                        } else if (element.elementType === 'TEXTAREA') {
+                            return <InputFormElementContainer element={element}/>;
+                        } else {
+                            return (<div>Unsupported Element</div>);
+                        }
+                    })}
                 </div>
 
 
@@ -45,11 +67,12 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
             <p>{widget.text}</p>
         </div>
     )
-}
+};
+
 const dispathToPropsMapper = dispatch => ({
     widgetNameChanged: (widgetId, newText) => actions.widgetNameChanged(dispatch, widgetId, newText),
     addFormElement: (widgetId, elementType) => actions.addFormElement(dispatch, widgetId, elementType)
-})
+});
 
 const stateToPropsMapper = state => ({})
 const FormContainer = connect(stateToPropsMapper, dispathToPropsMapper)(Form)
