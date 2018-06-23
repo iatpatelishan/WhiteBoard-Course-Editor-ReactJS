@@ -141,3 +141,10 @@ export const linkUrlChanged = (dispatch, widgetId, newUrl) => (
         id: widgetId,
         href: newUrl})
 )
+
+export const addFormElement = (dispatch, widgetId, elementType) => (
+    dispatch({
+        type: constants.FORM_ADD_ELEMENT,
+        id: widgetId,
+        type: elementType})
+)
