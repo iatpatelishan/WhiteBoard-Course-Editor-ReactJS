@@ -168,6 +168,8 @@ const widgets = (state = [], action) => {
                 return Object.assign({}, widget)
             })
         case constants.FORM_ADD_ELEMENT:
+        case constants.FORM_CHANGE_LABEL:
+        case constants.FORM_CHANGE_LABEL_DIRECTION:
             return state.map(widget => {
                 if (widget.id === action.id) {
                     widget.elements = elements(widget.elements,action)

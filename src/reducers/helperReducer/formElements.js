@@ -4,7 +4,6 @@ const elements  = (state = [], action) => {
     let maxid=state.length;
     switch (action.type) {
         case constants.FORM_ADD_ELEMENT:
-            console.log(state);
             if(action.elementType==='INPUT') {
                 return [...state,
                     {
@@ -56,7 +55,21 @@ const elements  = (state = [], action) => {
                         elementType: action.elementType,
                     }]
             }
-            return state
+            return state;
+        case constants.FORM_CHANGE_LABEL:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.label = action.label;
+                }
+                return Object.assign({}, element)
+            });
+        case constants.FORM_CHANGE_LABEL_DIRECTION:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.labelDirection = action.labelDirection;
+                }
+                return Object.assign({}, element)
+            });
         default:
             return state
     }

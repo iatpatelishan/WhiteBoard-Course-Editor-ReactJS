@@ -148,3 +148,21 @@ export const addFormElement = (dispatch, widgetId, elementType) => (
         id: widgetId,
         elementType: elementType})
 )
+
+export const changeLabelFormElement = (dispatch, widgetId, elementId, label) => (
+    dispatch({
+        type: constants.FORM_CHANGE_LABEL,
+        id: widgetId,
+        elementId: elementId,
+        label: label
+    })
+)
+
+export const changeLabelDirectionFormElement = (dispatch, widgetId, elementId, labelDirection) => (
+    dispatch({
+        type: constants.FORM_CHANGE_LABEL_DIRECTION,
+        id: widgetId,
+        elementId: elementId,
+        labelDirection: labelDirection
+    })
+)

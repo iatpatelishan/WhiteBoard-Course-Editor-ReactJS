@@ -36,24 +36,24 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                     <div className="col-sm-2">
                         <button className="btn btn-primary"
                                 onClick={() => addFormElement(widget.id, addElementElem.value)}>
-                            <i className="fa fa-wpforms"></i>
-                            Add Element
+                            <i className="fa fa-wpforms"></i> Add Element
                         </button>
                     </div>
                 </div>
 
                 <div>
+                    <h6>Elements :-</h6>
                     {widget.elements.map((element, index) => {
                         if (element.elementType === 'INPUT') {
-                            return <InputFormElementContainer element={element}/>;
+                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'CHECKBOX') {
-                            return <CheckboxFormElementContainer element={element}/>;
+                            return <CheckboxFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'RADIO') {
-                            return <InputFormElementContainer element={element}/>;
+                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'SELECT') {
-                            return <InputFormElementContainer element={element}/>;
+                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'TEXTAREA') {
-                            return <InputFormElementContainer element={element}/>;
+                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else {
                             return (<div>Unsupported Element</div>);
                         }
@@ -64,7 +64,23 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                 <hr/>
                 <h3>Preview</h3>
             </div>
-            <p>{widget.text}</p>
+            <div>
+                {widget.elements.map((element, index) => {
+                    return (
+                        <div key={index} className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}>
+                            <label className="col-sm-2 col-form-label">{element.label}</label>
+                            <div className="col-sm-10">
+                                <input className="form-control"
+                                       onChange={() => widgetNameChanged(widget.id, widgetNameElem.value)}
+                                       value={widget.name}
+                                       ref={node => widgetNameElem = node}
+                                       placeholder="Add Widget Name Here"/>
+                            </div>
+                        </div>
+                    );
+                }
+                )}
+            </div>
         </div>
     )
 };
