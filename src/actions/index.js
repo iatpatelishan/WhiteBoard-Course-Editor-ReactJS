@@ -175,3 +175,21 @@ export const changeCSSFormElement = (dispatch, widgetId, elementId, cssStyle) =>
         cssStyle: cssStyle
     })
 )
+
+export const changeOptionsFormElement = (dispatch, widgetId, elementId, options) => (
+    dispatch({
+        type: constants.FORM_CHANGE_OPTIONS,
+        id: widgetId,
+        elementId: elementId,
+        options: options
+    })
+)
+
+export const changeAnswerFormElement = (dispatch, widgetId, elementId, answer) => (
+    dispatch({
+        type: constants.FORM_CHANGE_ANSWER,
+        id: widgetId,
+        elementId: elementId,
+        answer: answer
+    })
+)

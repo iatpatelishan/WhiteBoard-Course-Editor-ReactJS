@@ -2,8 +2,9 @@ import {connect} from "react-redux";
 import React, {Component} from "react";
 import * as actions from "../../actions/index"
 import InputFormElementContainer from "../../components/widget/form/InputFormElement";
-import CheckboxFormElementContainer from "../../components/widget/form/CheckboxFormElement";
+import RadioFormElementContainer from "../../components/widget/form/RadioFormElement";
 import { UniversalStyle as Style } from 'react-css-component'
+import topicId from "../../reducers/topicId";
 
 
 const GenerateCSS = ({widget}) => {
@@ -16,6 +17,26 @@ const GenerateCSS = ({widget}) => {
     }
     return css;
 }
+
+const generatePreviewOptions = (topicId, element) => {
+    if(element !==undefined && element.options !==null && element.options !== undefined) {
+        return element.options.split('\n')
+            .map((line, i) => {
+                return (
+                    <div className="form-check" id={"T" + topicId + "Elem" + element.orderno + "BoxOption"+i}>
+                        <input className="form-check-input" type="radio"
+                               name={"T" + topicId + "Elem" + element.orderno}
+                               id={"T" + topicId + "Elem" + element.orderno + "Radio" + i}
+                               key={i} label={line} value={line} />
+                        <label className="form-check-label" id={"T" + topicId + "Elem" + element.orderno + "Radio" + i + "Label"} htmlFor={"T" + topicId + "Elem" + element.orderno + "Radio" + i}>
+                            {line}
+                        </label>
+                    </div>);
+            });
+    } else {
+        return [<p>Write Options above to get started!</p>];
+    }
+};
 
 
 const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => {
@@ -62,9 +83,9 @@ const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => 
                         if (element.elementType === 'INPUT') {
                             return <InputFormElementContainer key={element.id} widget={widget} element={element} />;
                         } else if (element.elementType === 'CHECKBOX') {
-                            return <CheckboxFormElementContainer key={element.id} widget={widget} element={element}/>;
-                        } else if (element.elementType === 'RADIO') {
                             return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
+                        } else if (element.elementType === 'RADIO') {
+                            return <RadioFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'SELECT') {
                             return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'TEXTAREA') {
@@ -83,18 +104,36 @@ const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => 
                 <Style css={css} />
 
                 {widget.elements.map((element, index) => {
-                    return (
-                        <div key={index} className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}>
-                            <label className="col-sm-2 col-form-label" id={"T"+topicId+"Elem"+element.orderno+"Label"}>{element.label}</label>
-                            <div className="col-sm-10">
-                                <input className="form-control"
-                                       placeholder="Add Input here"
-                                       id={"T"+topicId+"Elem"+element.orderno+"Input"}
-                                />
+                    if (element.elementType === 'INPUT') {
+                        return (
+                            <div key={index}
+                                 className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}
+                                 id={"T"+topicId+"Elem"+element.orderno+"Box"}>
+                                <label className="col-sm-2 col-form-label" id={"T"+topicId+"Elem"+element.orderno+"Label"}>{element.label}</label>
+                                <div className="col-sm-10">
+                                    <input className="form-control"
+                                           placeholder="Add Input here"
+                                           id={"T"+topicId+"Elem"+element.orderno+"Input"}
+                                    />
+                                </div>
                             </div>
+                        );
+                    } else if (element.elementType === 'RADIO') {
+                        let previewOptions=generatePreviewOptions(topicId, element);
+                        return (
+                            <div key={index}
+                                 className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}
+                                 id={"T"+topicId+"Elem"+element.orderno+"Box"}>
+                                <label className="col-sm-2 col-form-label" id={"T"+topicId+"Elem"+element.orderno+"Label"}>{element.label}</label>
+                                <div className="col-sm-10">
+                                    {previewOptions}
+                                </div>
+                            </div>
+                        );
+                    } else {
+                        return (<p>Unsupported Element</p>);
+                    }
 
-                        </div>
-                    );
                 }
                 )}
             </div>

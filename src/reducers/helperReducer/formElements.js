@@ -25,6 +25,8 @@ const elements  = (state = [], action) => {
                         label: 'Checkbox Label',
                         labelDirection: 'Horizontal',
                         elementType: action.elementType,
+                        options: '',
+                        answer:-1
                     }]
             } else if (action.elementType==='RADIO') {
                 return [...state,
@@ -79,6 +81,20 @@ const elements  = (state = [], action) => {
             return state.map(element => {
                 if (element.id === action.elementId) {
                     element.cssStyle = action.cssStyle;
+                }
+                return Object.assign({}, element)
+            });
+        case constants.FORM_CHANGE_OPTIONS:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.options = action.options;
+                }
+            return Object.assign({}, element)
+            });
+        case constants.FORM_CHANGE_ANSWER:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.answer = action.answer;
                 }
                 return Object.assign({}, element)
             });

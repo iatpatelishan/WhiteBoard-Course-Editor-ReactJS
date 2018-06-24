@@ -186,6 +186,8 @@ const widgets = (state = [], action) => {
         case constants.FORM_CHANGE_LABEL:
         case constants.FORM_CHANGE_LABEL_DIRECTION:
         case constants.FORM_CHANGE_CSS_STYLE:
+        case constants.FORM_CHANGE_OPTIONS:
+        case constants.FORM_CHANGE_ANSWER:
             return state.map(widget => {
                 if (widget.id === action.id) {
                     widget.elements = elements(widget.elements,action)
