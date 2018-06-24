@@ -3,10 +3,23 @@ import React, {Component} from "react";
 import * as actions from "../../actions/index"
 import InputFormElementContainer from "../../components/widget/form/InputFormElement";
 import CheckboxFormElementContainer from "../../components/widget/form/CheckboxFormElement";
+import { UniversalStyle as Style } from 'react-css-component'
+
+
+const GenerateCSS = ({widget}) => {
+
+    let css = '';
+    {widget.elements.map((elem,index) => {
+        css += elem.cssStyle + ' ';
+    })}
+    return css;
+}
+
 
 const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
     let widgetNameElem;
     let addElementElem;
+    let css = `${GenerateCSS({widget})}`;
     return (
         <div>
             <div style={{display: widget.editing ? 'block' : 'none'}} className="wbdv-single-widget-edit">
@@ -65,17 +78,22 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                 <h3>Preview</h3>
             </div>
             <div>
+                <Style css={css} />
+
                 {widget.elements.map((element, index) => {
                     return (
                         <div key={index} className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}>
-                            <label className="col-sm-2 col-form-label">{element.label}</label>
+                            <label className="col-sm-2 col-form-label" id={"Form"+widget.id+"Elem"+element.id+"label"}>{element.label}</label>
                             <div className="col-sm-10">
                                 <input className="form-control"
                                        onChange={() => widgetNameChanged(widget.id, widgetNameElem.value)}
                                        value={widget.name}
                                        ref={node => widgetNameElem = node}
-                                       placeholder="Add Widget Name Here"/>
+                                       placeholder="Add Widget Name Here"
+                                       id={"Form"+widget.id+"Elem"+element.id+"input"}
+                                />
                             </div>
+
                         </div>
                     );
                 }

@@ -2,9 +2,10 @@ import {connect} from "react-redux";
 import React, {Component} from "react";
 import * as actions from "../../../actions";
 
-const InputFormElement = ({widget, element, changeLabel, changeLabelDirection}) => {
+const InputFormElement = ({widget, element, changeLabel, changeLabelDirection, changeCSS}) => {
     let labelElem ;
     let labelDirection;
+    let cssElem;
     return (
         <div>
             <hr/>
@@ -32,10 +33,22 @@ const InputFormElement = ({widget, element, changeLabel, changeLabelDirection}) 
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">CSS Style</label>
                 <div className="col-sm-10">
-                    <input className="form-control"
-                           placeholder="Add Widget Name Here"/>
+                    <textarea className="form-control" onChange={() => changeCSS(widget.id, element.id, cssElem.value)}
+                              value={widget.cssStyle}
+                              ref={node => cssElem = node}
+                              placeholder="Add CSS Style Here" rows="4" />
                 </div>
             </div>
+            <div>
+                Supported CSS Styles :- <br/>
+                <pre>
+                #{"Form"+widget.id+"Elem"+element.id+"label"} {"{"}
+                <br/><br/>
+                {"}"}
+                </pre>
+            </div>
+
+
         </div>
     )
 };
@@ -48,6 +61,7 @@ const stateToPropsMapper = (state, ownProps) => ({
 const dispathToPropsMapper = dispatch => ({
     changeLabel: (widgetId, elementId, label) => actions.changeLabelFormElement(dispatch, widgetId, elementId, label),
     changeLabelDirection: (widgetId, elementId, labelDirection) => actions.changeLabelDirectionFormElement(dispatch, widgetId, elementId, labelDirection),
+    changeCSS : (widgetId, elementId, cssStyle) => actions.changeCSSFormElement(dispatch, widgetId, elementId, cssStyle),
 });
 
 const InputFormElementContainer = connect(stateToPropsMapper, dispathToPropsMapper)(InputFormElement);

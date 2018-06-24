@@ -166,3 +166,12 @@ export const changeLabelDirectionFormElement = (dispatch, widgetId, elementId, l
         labelDirection: labelDirection
     })
 )
+
+export const changeCSSFormElement = (dispatch, widgetId, elementId, cssStyle) => (
+    dispatch({
+        type: constants.FORM_CHANGE_CSS_STYLE,
+        id: widgetId,
+        elementId: elementId,
+        cssStyle: cssStyle
+    })
+)

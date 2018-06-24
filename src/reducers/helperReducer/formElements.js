@@ -70,6 +70,13 @@ const elements  = (state = [], action) => {
                 }
                 return Object.assign({}, element)
             });
+        case constants.FORM_CHANGE_CSS_STYLE:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.cssStyle = action.cssStyle;
+                }
+                return Object.assign({}, element)
+            });
         default:
             return state
     }
