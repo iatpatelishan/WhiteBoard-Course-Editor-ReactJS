@@ -5,10 +5,22 @@ import swal from "sweetalert"
 import elements from "./helperReducer/formElements"
 
 const widgets = (state = [], action) => {
+
     let maxid = 0;
     Object.keys(state).forEach(function (key) {
         if (state[key].id > maxid) {
             maxid = state[key].id
+        }
+    });
+
+    let maxElementOrder = 0;
+    Object.keys(state).forEach(function (widg) {
+        if (state[widg].elements !== undefined) {
+            Object.keys(state[widg].elements).forEach(function (elem) {
+                if(state[widg].elements[elem].orderno > maxElementOrder){
+                    maxElementOrder = state[widg].elements[elem].orderno;
+                }
+            });
         }
     });
 
@@ -20,7 +32,8 @@ const widgets = (state = [], action) => {
                     text: 'New Widget',
                     widgetType: action.lastWidgetType,
                     size: '1',
-                    editing: true
+                    editing: true,
+                    elements:[]
                 }]
         case constants.DELETE_WIDGET:
             return state.filter(widget => widget.id != action.id)
@@ -167,7 +180,9 @@ const widgets = (state = [], action) => {
                 }
                 return Object.assign({}, widget)
             })
+
         case constants.FORM_ADD_ELEMENT:
+            action.maxElementOrder=maxElementOrder;
         case constants.FORM_CHANGE_LABEL:
         case constants.FORM_CHANGE_LABEL_DIRECTION:
         case constants.FORM_CHANGE_CSS_STYLE:

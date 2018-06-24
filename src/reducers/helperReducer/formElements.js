@@ -8,6 +8,7 @@ const elements  = (state = [], action) => {
                 return [...state,
                     {
                         id: maxid + 1,
+                        orderno: action.maxElementOrder + 1,
                         cssClass: '',
                         cssStyle: '',
                         label: 'Input Label',
@@ -18,6 +19,7 @@ const elements  = (state = [], action) => {
                 return [...state,
                     {
                         id: maxid + 1,
+                        orderno: action.maxElementOrder + 1,
                         cssClass: '',
                         cssStyle: '',
                         label: 'Checkbox Label',
@@ -28,6 +30,7 @@ const elements  = (state = [], action) => {
                 return [...state,
                     {
                         id: maxid + 1,
+                        orderno: action.maxElementOrder + 1,
                         cssClass: '',
                         cssStyle: '',
                         label: 'Radio Label',
@@ -38,6 +41,7 @@ const elements  = (state = [], action) => {
                 return [...state,
                     {
                         id: maxid + 1,
+                        orderno: action.maxElementOrder + 1,
                         cssClass: '',
                         cssStyle: '',
                         label: 'Select Label',
@@ -48,6 +52,7 @@ const elements  = (state = [], action) => {
                 return [...state,
                     {
                         id: maxid + 1,
+                        orderno: action.maxElementOrder + 1,
                         cssClass: '',
                         cssStyle: '',
                         label: 'Textarea Label',

@@ -3,7 +3,6 @@ import WidgetApp from "../widget/WidgetApp";
 import {Provider} from "react-redux";
 import store from "../../store/courseEditor"
 import WidgetService from "../../services/WidgetService"
-import {StyleCacheProvider} from 'react-css-component'
 
 
 export default class TopicEditor extends Component {
@@ -53,9 +52,7 @@ export default class TopicEditor extends Component {
     render() {
         return (
             <Provider store={store}>
-                <StyleCacheProvider>
                     <WidgetApp topicId={this.state.topicId}/>
-                </StyleCacheProvider>
             </Provider>
         )
     }

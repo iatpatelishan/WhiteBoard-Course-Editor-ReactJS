@@ -5,6 +5,7 @@ import WidgetComponent from '../../components/Widget';
 import AddWidgetComponent from '../../components/AddWidget';
 import swal from "sweetalert";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import {StyleCacheProvider} from 'react-css-component'
 
 
 // a little function to help us with reordering the result
@@ -110,7 +111,9 @@ class WidgetListComponent extends Component {
                                                     provided.draggableProps.style
                                                 )}
                                             >
-                                                <WidgetComponent widgetIndex={index} key={item.id} widget={item}/>
+                                                <StyleCacheProvider>
+                                                <WidgetComponent widgetIndex={index} key={item.id} widget={item} />
+                                                </StyleCacheProvider>
                                             </div>
                                         )}
                                     </Draggable>

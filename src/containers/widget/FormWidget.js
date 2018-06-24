@@ -9,14 +9,16 @@ import { UniversalStyle as Style } from 'react-css-component'
 const GenerateCSS = ({widget}) => {
 
     let css = '';
-    {widget.elements.map((elem,index) => {
-        css += elem.cssStyle + ' ';
-    })}
+    if(widget.elements !== undefined) {
+        {widget.elements.map((elem,index) => {
+            css += elem.cssStyle + ' ';
+        })}
+    }
     return css;
 }
 
 
-const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
+const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => {
     let widgetNameElem;
     let addElementElem;
     let css = `${GenerateCSS({widget})}`;
@@ -58,7 +60,7 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                     <h6>Elements :-</h6>
                     {widget.elements.map((element, index) => {
                         if (element.elementType === 'INPUT') {
-                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
+                            return <InputFormElementContainer key={element.id} widget={widget} element={element} />;
                         } else if (element.elementType === 'CHECKBOX') {
                             return <CheckboxFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'RADIO') {
@@ -83,14 +85,11 @@ const Form = ({widget, preview, widgetNameChanged, addFormElement}) => {
                 {widget.elements.map((element, index) => {
                     return (
                         <div key={index} className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}>
-                            <label className="col-sm-2 col-form-label" id={"Form"+widget.id+"Elem"+element.id+"label"}>{element.label}</label>
+                            <label className="col-sm-2 col-form-label" id={"T"+topicId+"Elem"+element.orderno+"Label"}>{element.label}</label>
                             <div className="col-sm-10">
                                 <input className="form-control"
-                                       onChange={() => widgetNameChanged(widget.id, widgetNameElem.value)}
-                                       value={widget.name}
-                                       ref={node => widgetNameElem = node}
-                                       placeholder="Add Widget Name Here"
-                                       id={"Form"+widget.id+"Elem"+element.id+"input"}
+                                       placeholder="Add Input here"
+                                       id={"T"+topicId+"Elem"+element.orderno+"Input"}
                                 />
                             </div>
 
@@ -108,7 +107,9 @@ const dispathToPropsMapper = dispatch => ({
     addFormElement: (widgetId, elementType) => actions.addFormElement(dispatch, widgetId, elementType)
 });
 
-const stateToPropsMapper = state => ({})
+const stateToPropsMapper = state => ({
+    topicId: state.topicId
+})
 const FormContainer = connect(stateToPropsMapper, dispathToPropsMapper)(Form)
 
 export default FormContainer

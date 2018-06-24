@@ -224,4 +224,8 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.wbdv-cursor {
+    cursor: copy;
+}
+
 /* Switch End */
