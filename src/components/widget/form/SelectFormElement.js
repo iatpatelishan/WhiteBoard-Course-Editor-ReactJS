@@ -53,7 +53,7 @@ const generateOptions = (topicId, widget, element) => {
     }
 };
 
-const SelectFormElement = ({topicId, widget, element, changeLabel, changeLabelDirection, changeCSS, changeOptions, changeAnswerListForSelect}) => {
+const SelectFormElement = ({topicId, widget, element, deleteElement, changeLabel, changeLabelDirection, changeCSS, changeOptions, changeAnswerListForSelect}) => {
         let labelElem;
         let labelDirection;
         let cssElem;
@@ -64,7 +64,15 @@ const SelectFormElement = ({topicId, widget, element, changeLabel, changeLabelDi
         return (
             <div>
                 <hr/>
-                <h4>Select Element Editor</h4>
+                <h4>
+                    Select Element Editor
+                    <span className="btn btn-sm btn-danger float-right"
+                          title="Delete Element" onClick={() => deleteElement(widget.id, element.id)}>
+                    <i className="fa fa-times"></i>
+                </span>
+                </h4>
+                <br/>
+
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Label Name</label>
                     <div className="col-sm-10">
@@ -157,6 +165,7 @@ const stateToPropsMapper = (state, ownProps) => ({
 });
 
 const dispathToPropsMapper = dispatch => ({
+    deleteElement: (widgetId, elementId) => actions.deleteFormElement(dispatch, widgetId, elementId),
     changeLabel: (widgetId, elementId, label) => actions.changeLabelFormElement(dispatch, widgetId, elementId, label),
     changeLabelDirection: (widgetId, elementId, labelDirection) => actions.changeLabelDirectionFormElement(dispatch, widgetId, elementId, labelDirection),
     changeCSS: (widgetId, elementId, cssStyle) => actions.changeCSSFormElement(dispatch, widgetId, elementId, cssStyle),

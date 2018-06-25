@@ -14,14 +14,22 @@ const preventEditing = (event) => {
     }
 };
 
-const InputFormElement = ({topicId, widget, element, changeLabel, changeLabelDirection, changeCSS}) => {
+const InputFormElement = ({topicId, widget, element, deleteElement, changeLabel, changeLabelDirection, changeCSS}) => {
     let labelElem;
     let labelDirection;
     let cssElem;
     return (
         <div>
             <hr/>
-            <h4>Input Element Editor</h4>
+            <h4>
+                Input Element Editor
+                <span className="btn btn-sm btn-danger float-right"
+                      title="Delete Element" onClick={() => deleteElement(widget.id, element.id)}>
+                    <i className="fa fa-times"></i>
+                </span>
+            </h4>
+            <br/>
+
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">Label Name</label>
                 <div className="col-sm-10">
@@ -87,6 +95,7 @@ const stateToPropsMapper = (state, ownProps) => ({
 });
 
 const dispathToPropsMapper = dispatch => ({
+    deleteElement: (widgetId, elementId) => actions.deleteFormElement(dispatch, widgetId, elementId),
     changeLabel: (widgetId, elementId, label) => actions.changeLabelFormElement(dispatch, widgetId, elementId, label),
     changeLabelDirection: (widgetId, elementId, labelDirection) => actions.changeLabelDirectionFormElement(dispatch, widgetId, elementId, labelDirection),
     changeCSS: (widgetId, elementId, cssStyle) => actions.changeCSSFormElement(dispatch, widgetId, elementId, cssStyle),

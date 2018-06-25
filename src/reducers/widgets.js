@@ -183,6 +183,7 @@ const widgets = (state = [], action) => {
 
         case constants.FORM_ADD_ELEMENT:
             action.maxElementOrder=maxElementOrder;
+        case constants.FORM_DELETE_ELEMENT:
         case constants.FORM_CHANGE_LABEL:
         case constants.FORM_CHANGE_LABEL_DIRECTION:
         case constants.FORM_CHANGE_CSS_STYLE:

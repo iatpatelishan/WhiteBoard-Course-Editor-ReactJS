@@ -149,6 +149,13 @@ export const addFormElement = (dispatch, widgetId, elementType) => (
         elementType: elementType})
 )
 
+export const deleteFormElement = (dispatch, widgetId, elementId) => (
+    dispatch({
+        type: constants.FORM_DELETE_ELEMENT,
+        id: widgetId,
+        elementId: elementId})
+)
+
 export const changeLabelFormElement = (dispatch, widgetId, elementId, label) => (
     dispatch({
         type: constants.FORM_CHANGE_LABEL,

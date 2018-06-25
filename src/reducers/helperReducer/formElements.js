@@ -67,6 +67,8 @@ const elements  = (state = [], action) => {
                     }]
             }
             return state;
+        case constants.FORM_DELETE_ELEMENT:
+            return state.filter(element => element.id !== action.elementId);
         case constants.FORM_CHANGE_LABEL:
             return state.map(element => {
                 if (element.id === action.elementId) {
