@@ -26,7 +26,7 @@ const elements  = (state = [], action) => {
                         labelDirection: 'Horizontal',
                         elementType: action.elementType,
                         options: '',
-                        answer:-1
+                        answerList:[]
                     }]
             } else if (action.elementType==='RADIO') {
                 return [...state,
@@ -38,6 +38,8 @@ const elements  = (state = [], action) => {
                         label: 'Radio Label',
                         labelDirection: 'Horizontal',
                         elementType: action.elementType,
+                        options: '',
+                        answer:-1
                     }]
             } else if (action.elementType==='SELECT') {
                 return [...state,
@@ -95,6 +97,17 @@ const elements  = (state = [], action) => {
             return state.map(element => {
                 if (element.id === action.elementId) {
                     element.answer = action.answer;
+                }
+                return Object.assign({}, element)
+            });
+        case constants.FORM_CHANGE_ANSWER_LIST:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    if(action.ans){
+                        element.answerList.push(action.opt);
+                    } else {
+                        element.answerList = element.answerList.filter(e => e !== action.opt)
+                    }
                 }
                 return Object.assign({}, element)
             });

@@ -193,3 +193,14 @@ export const changeAnswerFormElement = (dispatch, widgetId, elementId, answer) =
         answer: answer
     })
 )
+
+
+export const changeAnswerListFormElement = (dispatch, widgetId, elementId, opt, ans) => (
+    dispatch({
+        type: constants.FORM_CHANGE_ANSWER_LIST,
+        id: widgetId,
+        elementId: elementId,
+        opt: opt,
+        ans: ans
+    })
+)
