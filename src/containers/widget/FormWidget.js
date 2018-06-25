@@ -110,9 +110,6 @@ const generateSelectPreviewOptions = (topicId, element) => {
 
 
 const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => {
-    if(widget.elements == undefined) {
-        widget.elements = [];
-    }
     let widgetNameElem;
     let addElementElem;
     let css = `${GenerateCSS({widget})}`;
