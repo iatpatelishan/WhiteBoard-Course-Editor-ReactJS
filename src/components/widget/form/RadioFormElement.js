@@ -73,7 +73,7 @@ const RadioFormElement = ({topicId, widget, element, changeLabel, changeLabelDir
                 <label className="col-sm-2 col-form-label">CSS Style</label>
                 <div className="col-sm-10">
                     <textarea className="form-control" onChange={() => changeCSS(widget.id, element.id, cssElem.value)}
-                              value={widget.cssStyle}
+                              value={element.cssStyle}
                               ref={node => cssElem = node}
                               placeholder="Add CSS Style Here" rows="4"/>
 

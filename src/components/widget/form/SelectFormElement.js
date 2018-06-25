@@ -90,7 +90,7 @@ const SelectFormElement = ({topicId, widget, element, changeLabel, changeLabelDi
                     <div className="col-sm-10">
                                 <textarea className="form-control"
                                           onChange={() => changeCSS(widget.id, element.id, cssElem.value)}
-                                          value={widget.cssStyle}
+                                          value={element.cssStyle}
                                           ref={node => cssElem = node}
                                           placeholder="Add CSS Style Here" rows="4"/>
 
