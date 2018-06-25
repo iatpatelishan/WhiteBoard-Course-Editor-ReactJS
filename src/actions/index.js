@@ -204,3 +204,21 @@ export const changeAnswerListFormElement = (dispatch, widgetId, elementId, opt, 
         ans: ans
     })
 )
+
+export const changeAnswerListForSelectFormElement = (dispatch, widgetId, elementId, selectElem) => {
+    var ans = [], opt;
+    var len = selectElem.options.length;
+    for (var i = 0; i < len; i++) {
+        opt = selectElem.options[i];
+
+        if (opt.selected) {
+            ans.push(opt.value);
+        }
+    }
+    return dispatch({
+        type: constants.FORM_CHANGE_ANSWER_LIST_SELECT,
+        id: widgetId,
+        elementId: elementId,
+        ans: ans
+    })
+}

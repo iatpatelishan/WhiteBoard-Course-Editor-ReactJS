@@ -51,6 +51,8 @@ const elements  = (state = [], action) => {
                         label: 'Select Label',
                         labelDirection: 'Horizontal',
                         elementType: action.elementType,
+                        options: '',
+                        answerList:[]
                     }]
             } else if (action.elementType==='TEXTAREA') {
                 return [...state,
@@ -108,6 +110,13 @@ const elements  = (state = [], action) => {
                     } else {
                         element.answerList = element.answerList.filter(e => e !== action.opt)
                     }
+                }
+                return Object.assign({}, element)
+            });
+        case constants.FORM_CHANGE_ANSWER_LIST_SELECT:
+            return state.map(element => {
+                if (element.id === action.elementId) {
+                    element.answerList = action.ans;
                 }
                 return Object.assign({}, element)
             });

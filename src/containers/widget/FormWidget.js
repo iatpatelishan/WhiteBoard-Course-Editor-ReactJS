@@ -4,6 +4,7 @@ import * as actions from "../../actions/index"
 import InputFormElementContainer from "../../components/widget/form/InputFormElement";
 import RadioFormElementContainer from "../../components/widget/form/RadioFormElement";
 import CheckboxFormElementContainer from "../../components/widget/form/CheckboxFormElement";
+import SelectFormElementContainer from "../../components/widget/form/SelectFormElement";
 import TextareaFormElementContainer from "../../components/widget/form/TextareaFormElement";
 import {UniversalStyle as Style} from 'react-css-component'
 import topicId from "../../reducers/topicId";
@@ -68,6 +69,45 @@ const generateRadioPreviewOptions = (topicId, element) => {
     }
 };
 
+const generateSelectPreviewOptions = (topicId, element) => {
+    if(element !==undefined && element.options !==null && element.options !== undefined) {
+        let ansCount = -1;
+        return element.options.split(/(?!\(.*)\n(?![^\[]*?\])/g)
+            .map((spline, i) => {
+                let elemNode;
+                if (spline.substr(0, 1) == '[' && spline.slice(-1) == ']') {
+                    let arr = spline.substr(1,spline.length-2).split('\n');
+                    let label = arr[0];
+                    arr.shift();
+                    ansCount++;
+                    arr = arr.map((item,index) => {
+                        let elemNode2;
+                        ansCount++;
+                        return (<option value={ansCount}
+                                        ref={node => elemNode2 = node}
+                                        key={i}>
+                            {item}
+                        </option>);
+                    });
+                    return (
+                        <optgroup label={label}>
+                            {arr}
+                        </optgroup>
+                    )
+                } else {
+                    ansCount++;
+                    return (<option value={ansCount}
+                                    ref={node => elemNode = node}
+                                    key={ansCount}>
+                        {spline}
+                    </option>);
+                }
+            });
+    } else {
+        return [<p>Write Options above to get started!</p>];
+    }
+};
+
 
 const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => {
     let widgetNameElem;
@@ -117,7 +157,7 @@ const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => 
                         } else if (element.elementType === 'RADIO') {
                             return <RadioFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'SELECT') {
-                            return <InputFormElementContainer key={element.id} widget={widget} element={element}/>;
+                            return <SelectFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else if (element.elementType === 'TEXTAREA') {
                             return <TextareaFormElementContainer key={element.id} widget={widget} element={element}/>;
                         } else {
@@ -172,6 +212,21 @@ const Form = ({topicId, widget, preview, widgetNameChanged, addFormElement}) => 
                                            id={"T" + topicId + "Elem" + element.orderno + "Label"}>{element.label}</label>
                                     <div className="col-sm-10">
                                         {previewOptions}
+                                    </div>
+                                </div>
+                            );
+                        } else if (element.elementType === 'SELECT') {
+                            let previewOptions = generateSelectPreviewOptions(topicId, element);
+                            return (
+                                <div key={index}
+                                     className={"form-group " + (element.labelDirection === 'Horizontal' ? 'row' : '')}
+                                     id={"T" + topicId + "Elem" + element.orderno + "Box"}>
+                                    <label className="col-sm-2 col-form-label"
+                                           id={"T" + topicId + "Elem" + element.orderno + "Label"}>{element.label}</label>
+                                    <div className="col-sm-10">
+                                        <select className="custom-select"
+                                                multiple
+                                                >{previewOptions}</select>
                                     </div>
                                 </div>
                             );

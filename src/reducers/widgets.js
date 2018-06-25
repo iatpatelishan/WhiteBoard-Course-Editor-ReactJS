@@ -189,6 +189,7 @@ const widgets = (state = [], action) => {
         case constants.FORM_CHANGE_OPTIONS:
         case constants.FORM_CHANGE_ANSWER:
         case constants.FORM_CHANGE_ANSWER_LIST:
+        case constants.FORM_CHANGE_ANSWER_LIST_SELECT:
             return state.map(widget => {
                 if (widget.id === action.id) {
                     widget.elements = elements(widget.elements,action)
