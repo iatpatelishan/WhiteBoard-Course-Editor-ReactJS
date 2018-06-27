@@ -40,7 +40,7 @@ const RadioFormElement = ({topicId, widget, element, deleteElement, changeLabel,
     let labelDirection;
     let cssElem;
     let optionsElem;
-    let formList = generateOptions(topicId, widget, element, changeAnswer);
+    let formList = generateOptions(topicId, widget, element, deleteElement, changeAnswer);
 
 
     return (
